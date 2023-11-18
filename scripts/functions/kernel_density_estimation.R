@@ -41,7 +41,7 @@ kde_univariate <- function(x_obs,
   }
   
   # Calculation of n evenly distributed data points over the range of x_obs
-  x <- seq(min(x_obs),max(x_obs),((max(x_obs)-min(x_obs))/n))[1:n]
+  x <- seq(min(x_obs),max(x_obs),length.out = n)
   
   # Get length of x_obs
   n_obs <- length(x_obs)
@@ -91,7 +91,7 @@ kde_get_prob_x <- function(x,
 }
 
 # test functions
-# set.seed(4322)
-# kde <- kde_univariate(x_obs = rnorm(100, mean = 4), h = 0.3, kernel = "gaussian", n = 1000)
-# plot(x = kde$x, y = kde$y)
+#set.seed(4322)
+#kde <- kde_univariate(x_obs = rnorm(100, mean = 4), h = 0.3, kernel = "gaussian", n = 30)
+#plot(x = kde$x, y = kde$y,type ="l")
 
