@@ -43,6 +43,7 @@ bandwidth_scott <- function(x){
 
 #bandwidth_plug_in <- function(x,kernel_fun,h_pilot){
 #  ...
+
 #}
 
 #### Least squares cross validation
