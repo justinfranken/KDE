@@ -47,6 +47,6 @@ bandwidth_scott <- function(x){
 
 #### Least squares cross validation
 
-#bandwidth_plug_in <- function(x,kernel_fun{
+#bandwidth_cv <- function(x,kernel_fun){
 #  ...
 #}
