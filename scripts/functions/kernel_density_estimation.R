@@ -7,18 +7,18 @@
 # Load kernel functions
 source(paste0(getwd(),"/scripts/functions/kernel.r"))
 
-kde_univariate <- function(x_obs,
+kde_univariate <- function(x_train,
                            h,
                            kernel = "gaussian",
                            n = 1000,
-                           return_x_obs = FALSE
+                           density_for_x = NA
                            ){
   ##############################################################################
   # Function for Univariate Kernel Density Estimation.                         #
   #                                                                            #
   # Args:                                                                      #
-  #   x_obs         Continuous variable for which the density is calculated    #
-  #                 (int/numeric vector)                                       #
+  #   x_train       Continuous variable which is used to calculate the         #
+  #                 density (int/numeric vector)                               #
   #   h             Bandwidth parameter (int/numeric)                          #         
   #   kernel        Kernel function (string): "gaussian" or "epanechnikov"     #
   #   n             Number of data for which the density is calculated (int)   #
@@ -42,21 +42,17 @@ kde_univariate <- function(x_obs,
   }
   
   # Select arguments for density function
-  if (return_x_obs){
-    x <- x_obs
-  }else{
+  if (is.na(density_for_x)){
     # Calculation of n evenly distributed data points over the range of x_obs
-    x <- seq(min(x_obs),max(x_obs),length.out = n)
+    x <- seq(min(x_train),max(x_train),length.out = n)
+  }else{
+    x <- density_for_x
   }
-  
-  # Get length of x_obs
-  n_obs <- length(x_obs)
   
   # Calculate the density for each x
   y    <- sapply(x,
                  kde_get_prob_x, 
-                 X_train = x_obs, 
-                 n_obs = n_obs,
+                 X_train = x_train, 
                  h = h, 
                  kernel_fun = kernel_fun)
   
@@ -68,7 +64,6 @@ kde_univariate <- function(x_obs,
 
 kde_get_prob_x <- function(x,
                            X_train,
-                           n_obs,
                            h,
                            kernel_fun
                            ) {
@@ -90,7 +85,7 @@ kde_get_prob_x <- function(x,
   vec_f <- kernel_fun((X_train - x)/h)
   
   # Get density for x
-  f <- sum(vec_f) / (n_obs*h)
+  f <- sum(vec_f) / (length(X_train)*h)
   
   # Return density
   return(f)
