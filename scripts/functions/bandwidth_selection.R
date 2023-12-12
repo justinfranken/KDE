@@ -41,13 +41,9 @@ bandwidth_scott <- function(x){
 
 #### Plug in methods 
 
-#bandwidth_plug_in <- function(x,kernel_fun,h_pilot){
-#  ...
-
-#}
+bandwidth_plug_in_sj <- bw.SJ
 
 #### Least squares cross validation
 
-#bandwidth_cv <- function(x,kernel_fun){
-#  ...
-#}
+bandwidth_cv <- bw.ucv
+
