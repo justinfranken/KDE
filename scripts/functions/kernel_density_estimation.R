@@ -75,7 +75,6 @@ kde_get_prob_x <- function(x,
   #   X_train       Observed training variables (int/numeric vector)           #
   #   h             Bandwidth parameter (int/numeric)                          #         
   #   kernel_fun    Kernel function.                                           #      
-  #   n             Number of data for which the density is calculated (int)   #
   #                                                                            #
   # Returns:                                                                   #
   #   f             Density of x (int/numeric)                                 #
@@ -93,6 +92,6 @@ kde_get_prob_x <- function(x,
 
 # test functions
 #set.seed(4322)
-#kde <- kde_univariate(x_obs = rnorm(100, mean = 4), h = 0.3, kernel = "gaussian", n = 30)
+#kde <- kde_univariate(x_train= rnorm(100, mean = 4), h = 0.3, kernel = "gaussian", n = 30)
 #plot(x = kde$x, y = kde$y,type ="l")
 
