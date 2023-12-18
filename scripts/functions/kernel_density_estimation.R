@@ -10,7 +10,7 @@ source(paste0(getwd(),"/scripts/functions/kernel.r"))
 kde_univariate <- function(x_train,
                            h,
                            kernel = "gaussian",
-                           n = 1000,
+                           n = 100,
                            density_for_x = NA
                            ){
   ##############################################################################
