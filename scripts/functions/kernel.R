@@ -22,6 +22,6 @@ epanechnikov_kernel <- function(v){
 }
 
 epanechnikov_kernel_second_derivative <- function(v){
-  y <- (3/2) * ifelse(abs(v)<=1,1,0)
+  y <- -(3/2) * ifelse(abs(v)<=1,1,0)
   return(y)
 }
