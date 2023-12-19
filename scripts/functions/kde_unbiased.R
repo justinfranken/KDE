@@ -56,7 +56,7 @@ kde_unbiased_univariate <- function(
   return(bias_out)
 }
 
-f_x_unbiased <- unbiased <- function(x,
+f_x_unbiased <- function(x,
                            x_train,
                            h,
                            b,
