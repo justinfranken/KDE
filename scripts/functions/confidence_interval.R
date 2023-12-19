@@ -9,7 +9,10 @@ conf_int <- function(x,
 ){
   
   if (model ==  "bc"){
-  
+    
+    # n
+    n <- length(x)
+    
     #auther recommendation
     b = h
     
