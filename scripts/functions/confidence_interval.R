@@ -8,10 +8,10 @@ conf_int <- function(x,
                      model
 ){
   
+  # n
+  n <- length(x)
+  
   if (model ==  "bc"){
-    
-    # n
-    n <- length(x)
     
     #auther recommendation
     b = h
@@ -19,11 +19,8 @@ conf_int <- function(x,
     # density for x_point
     f_hat_of_x <- kde_univariate(x_train = x, h = h, kernel = kernel, density_for_x = x_point)$y
     
-    # bias for x_point
-    bias_point <- bias_univariate(x_train = x, h = h, b = b, kernel = kernel, bias_for_x = x_point)$y
-    
-    # bias corrected estimate for x_point
-    f_hat_of_x_bc <- f_hat_of_x - bias_point
+    # bias corrected density for x_point
+    f_hat_of_x_bc <- kde_unbiased_univariate(x_train = x, h = h, b = b, kernel = kernel, density_for_x = x_point)$y
     
     # estimation of standard deviation
     f_hat <- kde_univariate(x_train = x, h = h, kernel = kernel)$y
@@ -44,16 +41,12 @@ conf_int <- function(x,
     # density for x_point
     f_hat_of_x <- kde_univariate(x_train = x, h = h, kernel = kernel, density_for_x = x_point)$y
     
-    # bias for x_point
-    bias_point <- bias_univariate(x_train = x, h = h, b = b, kernel = kernel, bias_for_x = x_point)$y
-    
-    # bias corrected estimate for x_point
-    f_hat_of_x_rbc <- f_hat_of_x - bias_point
+    # bias corrected density for x_point
+    f_hat_of_x_rbc <- kde_unbiased_univariate(x_train = x, h = h, b = b, kernel = kernel, density_for_x = x_point)$y
     
     # estimation of standard deviation to get robust estimate
-    f_hat <- kde_univariate(x_train = x, h = h, kernel = kernel)$y
-    bias <- bias_univariate(x_train = x, h = h, b = b, kernel = kernel)$y
-    sd_hat <- sd(f_hat-bias)
+    f_hat_rbc <- kde_unbiased_univariate(x_train = x, h = h, b = b, kernel = kernel)$y
+    sd_hat <- sd(f_hat_rbc)
     
     # estimation of robust bias corrected confindence intervals
     z <- qnorm(1-alpha/2, mean = 0, sd = 1)
