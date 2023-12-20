@@ -104,5 +104,5 @@ kde_get_prob_x <- function(x,
 # test functions
 #set.seed(4322)
 #kde <- kde_univariate(x_train= rnorm(100, mean = 4), h = 0.3, kernel = "gaussian", density_for_x = 0)
-#plot(x = kde$x, y = kde$y,type ="l")
+#plot(x = kde$x, y = kde$f,type ="l")
 

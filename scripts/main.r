@@ -23,11 +23,15 @@ for (n in n_range){
                  S = 500, # Simulations
                  data_model = "m1",
                  x_point = 2, # evaluation point for ci
-                 bandwidth_model = "plug_in_sj" ,
-                 conf_int_model = "rbc",
+                 bandwidth_model = "cv" ,
+                 conf_int_model = "us",
                  kernel = "gaussian",
                  alpha = 0.05)
   
   coverage_vec <- c(coverage_vec,coverage)
   
 }
+
+
+
+

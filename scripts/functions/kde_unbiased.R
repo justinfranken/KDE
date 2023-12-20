@@ -95,7 +95,7 @@ f_x_unbiased <- function(x,
   f <- sum(m_hat) / (n*h)
   
   # Variance of kernel m(.)
-  var_m_hat <- mean(m_hat^2)-mean(m_hat)^2
+  var_m_hat <- var(m_hat)
   
   return(list(f = f, var_m_hat = var_m_hat))
 }
@@ -103,6 +103,6 @@ f_x_unbiased <- function(x,
 
 #set.seed(4322)
 #kde <- kde_unbiased_univariate(x_train= rnorm(100, mean = 4),h = 0.3,b=0.3, kernel = "gaussian", n = 30)
-#plot(x = kde$x, y = kde$y,type ="l")
+#plot(x = kde$x, y = kde$f,type ="l")
 
 

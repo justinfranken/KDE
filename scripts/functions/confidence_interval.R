@@ -29,8 +29,8 @@ conf_int <- function(x,
     sd_point_hat_us <- sqrt(var_point_hat_us)
     
     # estimation of bias corrected confindence intervals
-    ci_lower <- f_point_hat_bc - z * (sd_point_hat_us  / sqrt(n*h))
-    ci_upper <- f_point_hat_bc + z * (sd_point_hat_us  / sqrt(n*h))
+    ci_lower <- f_point_hat_bc - z * sd_point_hat_us  
+    ci_upper <- f_point_hat_bc + z * sd_point_hat_us  
   }
  
   if (model ==  "rbc"){
@@ -49,8 +49,8 @@ conf_int <- function(x,
     sd_point_hat_rbc <- sqrt(var_point_hat_rbc)
     
     # estimation of robust bias corrected confindence intervals
-    ci_lower <- f_point_hat_rbc  - z * (sd_point_hat_rbc / sqrt(n*h))
-    ci_upper <- f_point_hat_rbc  + z * (sd_point_hat_rbc / sqrt(n*h))
+    ci_lower <- f_point_hat_rbc  - z * sd_point_hat_rbc 
+    ci_upper <- f_point_hat_rbc  + z * sd_point_hat_rbc 
   }
   
   if (model ==  "us"){
@@ -63,8 +63,8 @@ conf_int <- function(x,
     sd_point_hat_us <- sqrt(var_point_hat_us)
     
     # estimation of confindence intervals
-    ci_lower <- f_point_hat - z * (sd_point_hat_us / sqrt(n*h))
-    ci_upper <- f_point_hat + z * (sd_point_hat_us / sqrt(n*h))
+    ci_lower <- f_point_hat - z * sd_point_hat_us 
+    ci_upper <- f_point_hat + z * sd_point_hat_us 
   }
 
   ci <- c(ci_lower, ci_upper)
