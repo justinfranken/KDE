@@ -1,11 +1,8 @@
 ################################################################################
 #                                                                              #
-# This script deploys functions for unbiased kde estimation                    #
+# This script deploys functions for (unbiased) kde estimation                  #
 #                                                                              #
 ################################################################################
-
-# Load kernel functions
-source(paste0(getwd(),"/scripts/functions/kernel.r"))
 
 kde <- function( x,
                  eval = NULL,
@@ -16,7 +13,9 @@ kde <- function( x,
                  alpha = 0.05
 ){
   
-  # Check if kernel is available
+  #-----------------------------------------------------------------------------
+  # Get kernel
+  
   if(!kernel %in% c("gaussian","epanechnikov")){
     stop("Selected kernel function is not available")
   }
@@ -33,16 +32,21 @@ kde <- function( x,
     
   }
   
+  #-----------------------------------------------------------------------------
   # Select arguments for density function
+  
   if (is.null(eval)){
     # Calculation of n evenly distributed data points over the range of x
-    eval <- seq(min(x),max(x),length.out = 30)}
+    eval <- seq(min(x),max(x),length.out = 30)} 
 
+  # By auther recommendation
   if (is.null(b)){
     b <- h
-    }
+  }
   
+  #-----------------------------------------------------------------------------
   # Calculate the density for each x
+  
   density    <- lapply(eval,
                  f_x, 
                  x = x, 
@@ -52,6 +56,9 @@ kde <- function( x,
                  kernel_fun_second_derivative = kernel_fun_second_derivative)
   
   density <- bind_rows(density)
+  
+  #-----------------------------------------------------------------------------
+  # Extract important estimates
   
   # f_k
   f_k <- density$f_k
@@ -70,6 +77,9 @@ kde <- function( x,
               f_m = f_m,
               sd_f_k_hat = sd_f_k_hat,
               sd_f_m_hat = sd_f_m_hat)
+  
+  #-----------------------------------------------------------------------------
+  # Calculate and append selected confidence intervals
   
   out$ci <- list()
   

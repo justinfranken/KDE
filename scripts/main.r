@@ -2,8 +2,9 @@
 source(paste0(getwd(),"/scripts/lib.r"))
 
 # import sources
-source(paste0(getwd(),"/scripts/functions/kde.r"))
+source(paste0(getwd(),"/scripts/functions/kernel.r"))
 source(paste0(getwd(),"/scripts/functions/bandwidth_selection.r"))
+source(paste0(getwd(),"/scripts/functions/kde.r"))
 source(paste0(getwd(),"/scripts/functions/coverage_prob.r"))
 
 # set seed for reproducibility

@@ -16,29 +16,29 @@ coverage_for_simulation_step <- function(n,
     f_point = dnorm(x_point, mean = 0, sd = 1)
   }
   
-  if(data_model == "m2"){
-    # Model 2: Skewed Unimodal Density
-    x =      (rnorm(n,       mean = 0, sd = 1) + rnorm(n,       mean = 1/2, sd = 2/3) + 3*rnorm(n,       mean = 13/12, sd = 5/9))/5
-    f_point= (dnorm(x_point, mean = 0, sd = 1) + dnorm(x_point, mean = 1/2, sd = 2/3) + 3*dnorm(x_point, mean = 13/12, sd = 5/9))/5
-  }
+  #if(data_model == "m2"){
+  #  # Model 2: Skewed Unimodal Density
+  #  x =      (rnorm(n,       mean = 0, sd = 1) + rnorm(n,       mean = 1/2, sd = 2/3) + 3*rnorm(n,       mean = 13/12, sd = 5/9))/5
+  #  f_point= (dnorm(x_point, mean = 0, sd = 1) + dnorm(x_point, mean = 1/2, sd = 2/3) + 3*dnorm(x_point, mean = 13/12, sd = 5/9))/5
+  #}
   
-  if(data_model == "m3"){
-    # Model 3: Bimodal Density
-    x =       (rnorm(n,       mean = -1, sd = 2/3) + rnorm(n,       mean = 1, sd = 2/3))/2
-    f_point = (dnorm(x_point, mean = -1, sd = 2/3) + dnorm(x_point, mean = 1, sd = 2/3))/2
-  }
+  #if(data_model == "m3"){
+  #  # Model 3: Bimodal Density
+  #  x =       (rnorm(n,       mean = -1, sd = 2/3) + rnorm(n,       mean = 1, sd = 2/3))/2
+  #  f_point = (dnorm(x_point, mean = -1, sd = 2/3) + dnorm(x_point, mean = 1, sd = 2/3))/2
+  #}
   
-  if(data_model == "m4"){
-    # Model 3: Bimodal Density
-    x =       (rnorm(n,       mean = -1, sd = 2/3) + rnorm(n,       mean = 1, sd = 2/3))/2
-    f_point = (dnorm(x_point, mean = -1, sd = 2/3) + dnorm(x_point, mean = 1, sd = 2/3))/2
-  }
+  #if(data_model == "m4"){
+  #  # Model 3: Bimodal Density
+  #  x =       (rnorm(n,       mean = -1, sd = 2/3) + rnorm(n,       mean = 1, sd = 2/3))/2
+  #  f_point = (dnorm(x_point, mean = -1, sd = 2/3) + dnorm(x_point, mean = 1, sd = 2/3))/2
+  #}
   
-  if(data_model == "m4"){
-    # Model 3: Asymmetric Bimodal Density
-    x =       3*(rnorm(n,       mean = 0, sd = 1) + rnorm(n,       mean = 3/2, sd = 1/3))/4
-    f_point = 3*(dnorm(x_point, mean = 0, sd = 1) + dnorm(x_point, mean = 3/2, sd = 1/3))/4
-  }
+  #if(data_model == "m4"){
+  #  # Model 3: Asymmetric Bimodal Density
+  #  x =       3*(rnorm(n,       mean = 0, sd = 1) + rnorm(n,       mean = 3/2, sd = 1/3))/4
+  #  f_point = 3*(dnorm(x_point, mean = 0, sd = 1) + dnorm(x_point, mean = 3/2, sd = 1/3))/4
+  #}
  
   #-----------------------------------------------------------------------------
   # select bandwidth model 
