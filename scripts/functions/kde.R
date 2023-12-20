@@ -10,8 +10,10 @@ source(paste0(getwd(),"/scripts/functions/kernel.r"))
 kde <- function( x,
                  eval = NULL,
                  h,
-                 b,
-                 kernel = "gaussian"
+                 b = NULL,
+                 kernel = "gaussian",
+                 ci = c("us","bc","rbc"),
+                 alpha = 0.05
 ){
   
   # Check if kernel is available
@@ -36,6 +38,9 @@ kde <- function( x,
     # Calculation of n evenly distributed data points over the range of x
     eval <- seq(min(x),max(x),length.out = 30)}
 
+  if (is.null(b)){
+    b <- h
+    }
   
   # Calculate the density for each x
   density    <- lapply(eval,
@@ -65,6 +70,22 @@ kde <- function( x,
               f_m = f_m,
               sd_f_k_hat = sd_f_k_hat,
               sd_f_m_hat = sd_f_m_hat)
+  
+  out$ci <- list()
+  
+  z <- qnorm(1-alpha/2, mean = 0, sd = 1)
+  
+  if ("bc" %in% ci){
+    out$ci$bc <- c(f_m - z * sd_f_k_hat, f_m + z * sd_f_k_hat)
+  }
+  
+  if ("rbc" %in% ci){
+    out$ci$rbc <- c(f_m - z * sd_f_m_hat , f_m + z * sd_f_m_hat)
+  }
+  
+  if ("us" %in% ci){
+    out$ci$us <- c(f_k - z * sd_f_k_hat, f_k + z * sd_f_k_hat) 
+  }
   
   return(out)
 }
@@ -121,7 +142,4 @@ f_x <- function(eval,
               var_k_hat = var_k_hat))
 }
 
-
-
-
-
+#kde(x = rnorm(100,0,1),eval = 0, h = 0.3)

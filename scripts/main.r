@@ -4,7 +4,6 @@ source(paste0(getwd(),"/scripts/lib.r"))
 # import sources
 source(paste0(getwd(),"/scripts/functions/kde.r"))
 source(paste0(getwd(),"/scripts/functions/bandwidth_selection.r"))
-source(paste0(getwd(),"/scripts/functions/confidence_interval.r"))
 source(paste0(getwd(),"/scripts/functions/coverage_prob.r"))
 
 # set seed for reproducibility
@@ -23,7 +22,7 @@ for (n in n_range){
                  data_model = "m1",
                  x_point = 0, # evaluation point for ci
                  bandwidth_model = "cv" ,
-                 conf_int_model = "us",
+                 conf_int_model = "rbc",
                  kernel = "gaussian",
                  alpha = 0.05)
   
