@@ -7,23 +7,63 @@ coverage_for_simulation_step <- function(n,
                                          alpha
 ){
   
-  # select data model for simulations
+  #-----------------------------------------------------------------------------
+  # Select data generating process
+  
   if(data_model == "m1"){
-    x = rnorm(n, mean = 0, sd = 1)
-    f_of_x = dnorm(x_point, mean = 0, sd = 1)
+    # Model 1: Gaussian density
+    x =       rnorm(n,       mean = 0, sd = 1)
+    f_point = dnorm(x_point, mean = 0, sd = 1)
   }
   
-  # select bandwidth model for simulations
+  if(data_model == "m2"){
+    # Model 2: Skewed Unimodal Density
+    x =      (rnorm(n,       mean = 0, sd = 1) + rnorm(n,       mean = 1/2, sd = 2/3) + 3*rnorm(n,       mean = 13/12, sd = 5/9))/5
+    f_point= (dnorm(x_point, mean = 0, sd = 1) + dnorm(x_point, mean = 1/2, sd = 2/3) + 3*dnorm(x_point, mean = 13/12, sd = 5/9))/5
+  }
+  
+  if(data_model == "m3"){
+    # Model 3: Bimodal Density
+    x =       (rnorm(n,       mean = -1, sd = 2/3) + rnorm(n,       mean = 1, sd = 2/3))/2
+    f_point = (dnorm(x_point, mean = -1, sd = 2/3) + dnorm(x_point, mean = 1, sd = 2/3))/2
+  }
+  
+  if(data_model == "m4"){
+    # Model 3: Bimodal Density
+    x =       (rnorm(n,       mean = -1, sd = 2/3) + rnorm(n,       mean = 1, sd = 2/3))/2
+    f_point = (dnorm(x_point, mean = -1, sd = 2/3) + dnorm(x_point, mean = 1, sd = 2/3))/2
+  }
+  
+  if(data_model == "m4"){
+    # Model 3: Asymmetric Bimodal Density
+    x =       3*(rnorm(n,       mean = 0, sd = 1) + rnorm(n,       mean = 3/2, sd = 1/3))/4
+    f_point = 3*(dnorm(x_point, mean = 0, sd = 1) + dnorm(x_point, mean = 3/2, sd = 1/3))/4
+  }
+ 
+  #-----------------------------------------------------------------------------
+  # select bandwidth model 
+  
   if(bandwidth_model == "plug_in_sj"){
     h <- bandwidth_plug_in_sj(x)
   }
+  if(bandwidth_model == "cv"){
+    h <- suppressWarnings(bandwidth_cv(x)) 
+  }
+  if(bandwidth_model == "scott"){
+    h <- bandwidth_scott(x)
+  }
+  if(bandwidth_model == "silverman"){
+    h <- bandwidth_silverman(x)
+  }
   
-  # select confidence interval model for simulations
+  #-----------------------------------------------------------------------------
+  # select confidence interval model 
   conf_int <- conf_int(x = x, x_point = x_point, h = h, kernel = kernel, alpha = alpha,
-                       model = conf_int_model)
+                       model = conf_int_model) # model
   
-  
-  check_coverage <- (conf_int[2] > f_of_x) & (conf_int[1]  < f_of_x)
+  #-----------------------------------------------------------------------------
+  # evaluate coverage of simulation step
+  check_coverage <- (conf_int[2] > f_point) & (conf_int[1]  < f_point)
   
   return(check_coverage)
 }
