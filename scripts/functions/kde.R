@@ -50,14 +50,22 @@ kde_univariate <- function(x_train,
   }
   
   # Calculate the density for each x
-  y    <- sapply(x,
-                 kde_get_prob_x, 
-                 X_train = x_train, 
-                 h = h, 
-                 kernel_fun = kernel_fun)
+  density    <- lapply(x,
+                       kde_get_prob_x, 
+                       X_train = x_train, 
+                       h = h, 
+                       kernel_fun = kernel_fun)
   
-  # Store the results in a list
-  kde_out <- list(x = x, y = y)
+  density <- bind_rows(density)
+  
+  # f
+  f <- density$f
+  
+  # Variance of f
+  var_f_hat <- density$var_k_hat / (length(x_train)*h^2)
+
+    # Store the results in a list
+  kde_out <- list(x = x, f = f, var_f_hat = var_f_hat)
   
   return(kde_out)
 }
@@ -86,12 +94,15 @@ kde_get_prob_x <- function(x,
   # Get density for x
   f <- sum(k_hat) / (length(X_train)*h)
   
+  # Variance of kernel 
+  var_k_hat <- mean(k_hat^2)-mean(k_hat)^2
+  
   # Return density
-  return(f)
+  return(list(f = f, var_k_hat = var_k_hat))
 }
 
 # test functions
 #set.seed(4322)
-#kde <- kde_univariate(x_train= rnorm(100, mean = 4), h = 0.3, kernel = "gaussian", n = 30)
+#kde <- kde_univariate(x_train= rnorm(100, mean = 4), h = 0.3, kernel = "gaussian", density_for_x = 0)
 #plot(x = kde$x, y = kde$y,type ="l")
 

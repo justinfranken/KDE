@@ -42,7 +42,7 @@ kde_unbiased_univariate <- function(
   }
   
   # Calculate the density for each x
-  y    <- sapply(x,
+  density    <- lapply(x,
                  f_x_unbiased, 
                  x_train = x_train, 
                  h = h, 
@@ -50,10 +50,18 @@ kde_unbiased_univariate <- function(
                  kernel_fun = kernel_fun,
                  kernel_fun_second_derivative = kernel_fun_second_derivative)
   
-  # Store the results in a list
-  bias_out <- list(x = x, y = y)
+  density <- bind_rows(density)
   
-  return(bias_out)
+  # f
+  f <- density$f
+  
+  # Variance of f
+  var_f_hat <- density$var_m_hat / (length(x_train)*h^2)
+  
+  # Store the results in a list
+  out <- list(x = x, f = f, var_f_hat = var_f_hat)
+  
+  return(out)
 }
 
 f_x_unbiased <- function(x,
@@ -80,11 +88,16 @@ f_x_unbiased <- function(x,
   # Get second moment of k(.)
   mu_k <- (1/2) * integrate(function(v) v^2 * kernel_fun(v), lower = -Inf, upper = Inf)$value 
   
+  # Construct unbiased kernel m(.)
   m_hat <- k_hat - rho^3 * l_2_hat * mu_k 
   
-  # Return density
+  # Density f using m(.)
   f <- sum(m_hat) / (n*h)
-  return(f)
+  
+  # Variance of kernel m(.)
+  var_m_hat <- mean(m_hat^2)-mean(m_hat)^2
+  
+  return(list(f = f, var_m_hat = var_m_hat))
 }
 
 
