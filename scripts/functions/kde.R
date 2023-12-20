@@ -7,26 +7,11 @@
 # Load kernel functions
 source(paste0(getwd(),"/scripts/functions/kernel.r"))
 
-kde_univariate <- function(x_train,
+kde_univariate <- function(x,
+                           eval,
                            h,
-                           kernel = "gaussian",
-                           n = 100,
-                           density_for_x = NA
+                           kernel = "gaussian"
                            ){
-  ##############################################################################
-  # Function for Univariate Kernel Density Estimation.                         #
-  #                                                                            #
-  # Args:                                                                      #
-  #   x_train       Continuous variable which is used to calculate the         #
-  #                 density (int/numeric vector)                               #
-  #   h             Bandwidth parameter (int/numeric)                          #         
-  #   kernel        Kernel function (string): "gaussian" or "epanechnikov"     #
-  #   n             Number of data for which the density is calculated (int)   #
-  #                                                                            #
-  # Returns:                                                                   #
-  #   kde_out       List containing the continuous x variable with calculated  #
-  #                 densities (y)                                              #
-  ##############################################################################
   
   # Check if kernel is available
   if(!kernel %in% c("gaussian","epanechnikov")){
@@ -42,17 +27,15 @@ kde_univariate <- function(x_train,
   }
   
   # Select arguments for density function
-  if (is.na(density_for_x)){
+  if (is.null(eval)){
     # Calculation of n evenly distributed data points over the range of x_obs
-    x <- seq(min(x_train),max(x_train),length.out = n)
-  }else{
-    x <- density_for_x
+    eval <- seq(min(x),max(x),length.out = 30)
   }
   
   # Calculate the density for each x
-  density    <- lapply(x,
+  density    <- lapply(eval,
                        kde_get_prob_x, 
-                       X_train = x_train, 
+                       x = x, 
                        h = h, 
                        kernel_fun = kernel_fun)
   
@@ -62,37 +45,25 @@ kde_univariate <- function(x_train,
   f <- density$f
   
   # Variance of f
-  var_f_hat <- density$var_k_hat / (length(x_train)*h^2)
+  sqrt(sd_f_hat <- density$var_k_hat / (length(x)*h^2))
 
     # Store the results in a list
-  kde_out <- list(x = x, f = f, var_f_hat = var_f_hat)
+  kde_out <- list(eval = eval, f = f, sd_f_hat = sd_f_hat)
   
   return(kde_out)
 }
 
-kde_get_prob_x <- function(x,
-                           X_train,
+kde_get_prob_x <- function(eval,
+                           x,
                            h,
                            kernel_fun
                            ) {
-  ##############################################################################
-  # Function which maps each x to its density.                                 #
-  #                                                                            #
-  # Args:                                                                      #
-  #   x             x for which the density is calculated (int/numer)          #          
-  #   X_train       Observed training variables (int/numeric vector)           #
-  #   h             Bandwidth parameter (int/numeric)                          #         
-  #   kernel_fun    Kernel function.                                           #      
-  #                                                                            #
-  # Returns:                                                                   #
-  #   f             Density of x (int/numeric)                                 #
-  ##############################################################################
   
   # Apply kernel function
-  k_hat <- kernel_fun((X_train - x)/h)
+  k_hat <- kernel_fun((x - eval)/h)
   
   # Get density for x
-  f <- sum(k_hat) / (length(X_train)*h)
+  f <- sum(k_hat) / (length(x)*h)
   
   # Variance of kernel 
   var_k_hat <- mean(k_hat^2)-mean(k_hat)^2

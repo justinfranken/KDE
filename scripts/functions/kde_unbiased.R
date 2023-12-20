@@ -8,12 +8,11 @@
 source(paste0(getwd(),"/scripts/functions/kernel.r"))
 
 kde_unbiased_univariate <- function(
-                           x_train,
+                           x,
+                           eval = NULL,
                            h,
                            b,
-                           kernel = "gaussian",
-                           n = 100,
-                           density_for_x = NA
+                           kernel = "gaussian"
 ){
   
   # Check if kernel is available
@@ -34,17 +33,15 @@ kde_unbiased_univariate <- function(
   }
   
   # Select arguments for density function
-  if (is.na(density_for_x)){
-    # Calculation of n evenly distributed data points over the range of x_obs
-    x <- seq(min(x_train),max(x_train),length.out = n)
-  }else{
-    x <- density_for_x
-  }
+  if (is.null(eval)){
+    # Calculation of n evenly distributed data points over the range of x
+    eval <- seq(min(x),max(x),length.out = 30)}
+
   
   # Calculate the density for each x
-  density    <- lapply(x,
+  density    <- lapply(eval,
                  f_x_unbiased, 
-                 x_train = x_train, 
+                 x = x, 
                  h = h, 
                  b = b,
                  kernel_fun = kernel_fun,
@@ -56,30 +53,30 @@ kde_unbiased_univariate <- function(
   f <- density$f
   
   # Variance of f
-  var_f_hat <- density$var_m_hat / (length(x_train)*h^2)
+  sd_f_hat <- sqrt(density$var_m_hat / (length(x)*h^2))
   
   # Store the results in a list
-  out <- list(x = x, f = f, var_f_hat = var_f_hat)
+  out <- list(eval = eval, f = f, sd_f_hat = sd_f_hat)
   
   return(out)
 }
 
-f_x_unbiased <- function(x,
-                           x_train,
-                           h,
-                           b,
-                           kernel_fun,
-                           kernel_fun_second_derivative 
+f_x_unbiased <- function(eval,
+                         x,
+                         h,
+                         b,
+                         kernel_fun,
+                         kernel_fun_second_derivative 
 ) {
   
   # Get n
-  n <- length(x_train)
+  n <- length(x)
   
   # rho
   rho <- h/b
   
   # Calculate density with standard kernel k(.) using h
-  v <- (x_train - x)/h
+  v <- (x - eval)/h
   k_hat <- kernel_fun(v)
   
   # Calculate density with second derivative of l(.) using b
@@ -101,8 +98,6 @@ f_x_unbiased <- function(x,
 }
 
 
-#set.seed(4322)
-#kde <- kde_unbiased_univariate(x_train= rnorm(100, mean = 4),h = 0.3,b=0.3, kernel = "gaussian", n = 30)
-#plot(x = kde$x, y = kde$f,type ="l")
+
 
 

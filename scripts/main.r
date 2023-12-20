@@ -24,7 +24,7 @@ for (n in n_range){
                  data_model = "m1",
                  x_point = 2, # evaluation point for ci
                  bandwidth_model = "cv" ,
-                 conf_int_model = "us",
+                 conf_int_model = "rbc",
                  kernel = "gaussian",
                  alpha = 0.05)
   
