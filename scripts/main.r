@@ -10,27 +10,44 @@ source(paste0(getwd(),"/scripts/functions/coverage_prob.r"))
 # set seed for reproducibility
 set.seed(4322)
 
+#-------------------         fix parameters          ---------------------------
+
+S <- 10000
+alpha <- 0.05
+
 #-------------------       coverage probability      ---------------------------
 
-n_range <- c(10,20,30,40,50,100,1000,10000)
+data_model <- c("m1")
+x_point <- c(4,2,0,-2,-4)
+n <-  seq(10,100,10)
+bandwidth_model <- c("cv")
+conf_int_model <- c("bc","rbc")
+kernel = c("epanechnikov")
 
-coverage_vec <- c()
+# Create a data frame with all combinations
+coverage_prob_grid <- expand.grid(data_model = data_model,
+                                  x_point = x_point,
+                                  n = n,
+                                  bandwidth_model = bandwidth_model,
+                                  conf_int_model = conf_int_model,
+                                  kernel = kernel)
   
-for (n in n_range){
-  coverage <- coverage_for_n(
-                 n = n,
-                 S = 500, # Simulations
-                 data_model = "m1",
-                 x_point = 0, # evaluation point for ci
-                 bandwidth_model = "cv" ,
-                 conf_int_model = "rbc",
-                 kernel = "gaussian",
-                 alpha = 0.05)
+for (i in c(1:nrow(coverage_prob_grid))){
   
-  coverage_vec <- c(coverage_vec,coverage)
+  param <- coverage_prob_grid[i,]
+  
+  coverage_prob <- coverage_for_n(
+                       n = param$n,
+                       S = S, 
+                       data_model = param$data_model,
+                       x_point = param$x_point, 
+                       bandwidth_model = param$bandwidth_model ,
+                       conf_int_model = param$conf_int_model,
+                       kernel = param$kernel,
+                       alpha = alpha)
+  
+  coverage_prob_grid[i,"coverage_prob"] <- coverage_prob
   
 }
-
-
 
 
