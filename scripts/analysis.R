@@ -1,4 +1,7 @@
-# load functions
+# import libraries
+source(paste0(getwd(),"/scripts/lib.r"))
+
+# import sources
 source(paste0(getwd(),"/scripts/functions/plots/coverage_prob_plot.r"))
 
 # load simulation results
