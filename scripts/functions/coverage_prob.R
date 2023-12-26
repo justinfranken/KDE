@@ -78,11 +78,9 @@ coverage_for_n <- function(n,
                           kernel,
                           alpha){
   
-  cat("Esimtation of coverage probability for data_model =",data_model,"and n =",n,"\n")
-  
   simulations <- sapply((1:S),function(s){
     
-    if (s %% 100 == 0){cat("Simulations:",s,"\n")}
+    #if (s %% 100 == 0){cat("Simulations:",s,"\n")}
     
     coverage <- coverage_for_simulation_step(n,
                                              x_point,
@@ -98,7 +96,7 @@ coverage_for_n <- function(n,
   
   coverage_prob <- mean(simulations)
   
-  cat("Coverage probability:",coverage_prob,"\n")
+  #cat("Coverage probability:",coverage_prob,"\n")
   
   return(coverage_prob)
 }

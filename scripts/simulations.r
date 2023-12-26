@@ -12,11 +12,12 @@ set.seed(4322)
 
 #-------------------         fix parameters          ---------------------------
 
-S <- 10000
+S <- 1000
 alpha <- 0.05
 
 #-------------------       coverage probability      ---------------------------
 
+# Basis for construction of combinations
 data_model <- c("m1")
 x_point <- c(4,2,0,-2,-4)
 n <-  seq(10,100,10)
@@ -31,10 +32,13 @@ coverage_prob_grid <- expand.grid(data_model = data_model,
                                   bandwidth_model = bandwidth_model,
                                   conf_int_model = conf_int_model,
                                   kernel = kernel)
-  
+
+# Esimtate coverage probability for all combinations
 for (i in c(1:nrow(coverage_prob_grid))){
   
   param <- coverage_prob_grid[i,]
+  
+  print(param)
   
   coverage_prob <- coverage_for_n(
                        n = param$n,
@@ -50,4 +54,6 @@ for (i in c(1:nrow(coverage_prob_grid))){
   
 }
 
+# Save simulation results
+save(coverage_prob_grid, file="data/simulations/coverage_prob_grid.Rda")
 
