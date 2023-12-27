@@ -20,8 +20,8 @@ alpha <- 0.05
 # Basis for construction of combinations
 data_model <- c("m1")
 x_point <- c(4,2,0,-2,-4)
-n <-  seq(10,100,10)
-bandwidth_model <- c("cv")
+n <-  seq(25,500,25)
+bandwidth_model <- c("cv","plug_in_sj")
 conf_int_model <- c("bc","rbc")
 kernel = c("epanechnikov")
 
@@ -38,8 +38,6 @@ for (i in c(1:nrow(coverage_prob_grid))){
   
   param <- coverage_prob_grid[i,]
   
-  print(param)
-  
   coverage_prob <- coverage_for_n(
                        n = param$n,
                        S = S, 
@@ -51,6 +49,8 @@ for (i in c(1:nrow(coverage_prob_grid))){
                        alpha = alpha)
   
   coverage_prob_grid[i,"coverage_prob"] <- coverage_prob
+  
+  print(coverage_prob_grid[i,])
   
 }
 

@@ -12,9 +12,8 @@ load(paste0(getwd(),"/data/simulations/coverage_prob_grid.Rda"))
 # Plot of the coverage probability for confidence interval construction 
 # methods as a function of the sample size
 
-coverage_for_sample_size(data_model = "m1",
-                         x_point = -2,
-                         bandwidth_model = "cv",
-                         conf_int_model = c("bc","rbc"),
-                         kernel = "epanechnikov"
+coverage_prob_n_plot(data_model = "m1",
+                     x_point = -2,
+                     conf_int_model = c("bc","rbc"),
+                     kernel = "epanechnikov"
 )
