@@ -13,7 +13,8 @@ load(paste0(getwd(),"/data/simulations/coverage_prob_grid.Rda"))
 # methods as a function of the sample size
 
 coverage_prob_n_plot(data_model = "m1",
-                     x_point = -2,
+                     x_point = -4,
                      conf_int_model = c("bc","rbc"),
+                     bandwidth_model = c("cv","plug_in_sj"),
                      kernel = "epanechnikov"
 )

@@ -152,4 +152,6 @@ f_x <- function(eval,
               var_k_hat = var_k_hat))
 }
 
-#kde(x = rnorm(100,0,1),eval = 0, h = 0.3)
+#source(paste0(getwd(),"/scripts/functions/kernel.r"))
+#source(paste0(getwd(),"/scripts/functions/kernel.r"))
+#kde(x = rnorm(100000,0,1),eval = -4, h = 0.3, kernel ="epanechnikov")

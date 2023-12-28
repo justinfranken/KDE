@@ -33,6 +33,8 @@ coverage_prob_grid <- expand.grid(data_model = data_model,
                                   conf_int_model = conf_int_model,
                                   kernel = kernel)
 
+
+
 # Esimtate coverage probability for all combinations
 for (i in c(1:nrow(coverage_prob_grid))){
   

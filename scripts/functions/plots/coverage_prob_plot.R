@@ -1,6 +1,7 @@
 coverage_prob_n_plot <- function(data_model,
                                  x_point,
                                  conf_int_model = c("rbc","bc","us"),
+                                 bandwidth_model,
                                  kernel = "epanechnikov"
                                      ){
   
@@ -8,7 +9,8 @@ coverage_prob_n_plot <- function(data_model,
     c(
       coverage_prob_grid$data_model == data_model &
       coverage_prob_grid$x_point == x_point &
-      coverage_prob_grid$conf_int_model %in%  conf_int_model &
+      coverage_prob_grid$conf_int_model %in% conf_int_model &
+      coverage_prob_grid$bandwidth_model %in% bandwidth_model &
       coverage_prob_grid$kernel == kernel
     ),
   ]
@@ -24,7 +26,7 @@ coverage_prob_n_plot <- function(data_model,
           color = ~combined_model,
           type = 'scatter', 
           mode = 'lines'
-  ) %>%
+  )  %>%
     layout(title = list(
       text = paste0("<B>Model = ", data_model,
                     ", x = ",x_point,"<B>"),
@@ -45,5 +47,6 @@ coverage_prob_n_plot <- function(data_model,
   
   return(plot)
 }
+
 
 
