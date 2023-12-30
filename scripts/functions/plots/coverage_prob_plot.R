@@ -34,6 +34,7 @@ coverage_prob_n_plot <- function(data_model,
     ),
     xaxis = list(title = list(text = "<B>Sample size<B>",
                               font = list(size = 12)),
+                              type = "log", 
                  tickfont = list(size = 12)
                  ),
     yaxis = list(title = list(text = "<B>Estimated coverage probability<B>",

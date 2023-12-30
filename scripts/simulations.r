@@ -20,7 +20,7 @@ alpha <- 0.05
 # Basis for construction of combinations
 data_model <- c("m1")
 x_point <- c(4,2,0,-2,-4)
-n <-  seq(25,500,25)
+n <-  c(seq(25,500,25), seq(750, 5000, 250), seq(5000, 10000, 1000))
 bandwidth_model <- c("cv","plug_in_sj")
 conf_int_model <- c("bc","rbc")
 kernel = c("epanechnikov")
