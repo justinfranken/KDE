@@ -19,21 +19,27 @@ alpha <- 0.05
 
 # Basis for construction of combinations
 data_model <- c("m1")
-x_point <- c(4,2,0,-2,-4)
-n <-  seq(25,500,25)
-bandwidth_model <- c("cv","plug_in_sj")
-conf_int_model <- c("bc","rbc")
+x_point <- c(2,0,-2)
+n <- seq(25,500,25)
 kernel = c("epanechnikov")
 
 # Create a data frame with all combinations
-coverage_prob_grid <- expand.grid(data_model = data_model,
-                                  x_point = x_point,
-                                  n = n,
-                                  bandwidth_model = bandwidth_model,
-                                  conf_int_model = conf_int_model,
-                                  kernel = kernel)
+coverage_prob_grid_1 <- expand.grid(data_model = data_model,
+                                    x_point = x_point,
+                                    n = n,
+                                    bandwidth_model = c("cv","plug_in_sj"),
+                                    conf_int_model = c("bc","rbc"),
+                                    kernel = kernel)
 
+coverage_prob_grid_2 <- expand.grid(data_model = data_model,
+                                    x_point = x_point,
+                                    n = n,
+                                    bandwidth_model = c("hall_0.3","hall_0.5","hall_0.7"),
+                                    conf_int_model = c("us"),
+                                    kernel = kernel)
 
+coverage_prob_grid <- rbind(coverage_prob_grid_1,
+                            coverage_prob_grid_2)
 
 # Esimtate coverage probability for all combinations
 for (i in c(1:nrow(coverage_prob_grid))){
@@ -57,5 +63,5 @@ for (i in c(1:nrow(coverage_prob_grid))){
 }
 
 # Save simulation results
-save(coverage_prob_grid, file="data/simulations/coverage_prob_grid.Rda")
+#save(coverage_prob_grid, file="data/simulations/coverage_prob_grid.Rda")
 
