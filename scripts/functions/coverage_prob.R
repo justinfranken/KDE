@@ -64,7 +64,7 @@ coverage_for_simulation_step <- function(n,
   
   #-----------------------------------------------------------------------------
   # evaluate coverage of simulation step
-  check_coverage <- (conf_int[2] > f_point) & (conf_int[1]  < f_point)
+  check_coverage <- (conf_int[1]  <= f_point) & (f_point <= conf_int[2])  
   
   return(check_coverage)
 }

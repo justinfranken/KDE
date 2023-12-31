@@ -154,4 +154,4 @@ f_x <- function(eval,
 
 #source(paste0(getwd(),"/scripts/functions/kernel.r"))
 #source(paste0(getwd(),"/scripts/functions/kernel.r"))
-#kde(x = rnorm(100000,0,1),eval = -4, h = 0.3, kernel ="epanechnikov")
+#kde(x = rnorm(100,0,1),eval = -3, h = 0.3, kernel ="epanechnikov")
