@@ -61,7 +61,9 @@ coverage_for_simulation_step <- function(n,
   if(bandwidth_model == "silverman"){
     h <- bandwidth_silverman(x)
   }
-  
+  if(bandwidth_model == "hall"){
+    h <- bandwidth_hall(x)
+  }
   #-----------------------------------------------------------------------------
   # select confidence interval model 
   conf_int_list <- kde(x = x, eval = x_point, h = h, kernel = kernel, ci = conf_int_model, alpha = alpha)$ci

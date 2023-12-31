@@ -47,3 +47,25 @@ bandwidth_plug_in_sj <- bw.SJ
 
 bandwidth_cv <- bw.ucv
 
+#### Hall - Undersmoothing
+
+bandwidth_hall <- function(x,lambda = 0.1){
+  ##############################################################################
+  # Function for undersmoothed bandwidth selection as proposed by Hall (1992)  #
+  #                                                                            #
+  # Args:                                                                      #
+  #   x             variable for which the bandwidth is calculated             #
+  #                 (vector int/cnumeric)                                      #
+  #   lambda        Adjust level of undersmoothing                             # 
+  #                                                                            #
+  #                                                                            #
+  # Returns:                                                                   #
+  #   bw            Calculated bandwidth (numeric)                             #
+  ##############################################################################
+  
+  n <- length(x)
+  bw <- lambda * n^(1/5)
+  
+  return(bw)
+}
+
