@@ -49,18 +49,25 @@ coverage_for_simulation_step <- function(n,
   #-----------------------------------------------------------------------------
   # select bandwidth model 
   
+  # plug in methods 
   if(bandwidth_model == "plug_in_sj"){
     h <- bandwidth_plug_in_sj(x)
   }
+  
+  # cv methods
   if(bandwidth_model == "cv"){
     h <- suppressWarnings(bandwidth_cv(x)) 
   }
+  
+  # rule of thumb methods
   if(bandwidth_model == "scott"){
     h <- bandwidth_scott(x)
   }
   if(bandwidth_model == "silverman"){
     h <- bandwidth_silverman(x)
   }
+  
+  # halls rule for undersmoothing with different lambdas 
   if(bandwidth_model == "hall_0.3"){
     h <- bandwidth_hall(x, lambda = 0.3)
   }
@@ -70,6 +77,17 @@ coverage_for_simulation_step <- function(n,
   if(bandwidth_model == "hall_0.7"){
     h <- bandwidth_hall(x, lambda = 0.7)
   } 
+  
+  # explorative bandwidth ideas for undersmoothing
+  if(bandwidth_model == "plug_in_sj_0.3"){
+    h <- 0.3 * bandwidth_plug_in_sj(x)
+  }
+  if(bandwidth_model == "plug_in_sj_0.5"){
+    h <- 0.5 * bandwidth_plug_in_sj(x)
+  }
+  if(bandwidth_model == "plug_in_sj_0.7"){
+    h <- 0.7 * bandwidth_plug_in_sj(x)
+  }
     
   #-----------------------------------------------------------------------------
   # select confidence interval model 
