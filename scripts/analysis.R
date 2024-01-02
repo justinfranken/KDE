@@ -5,7 +5,7 @@ source(paste0(getwd(),"/scripts/lib.r"))
 source(paste0(getwd(),"/scripts/functions/plots/coverage_prob_plot.r"))
 
 # load simulation results
-#load(paste0(getwd(),"/data/simulations/coverage_prob_grid.Rda"))
+load(paste0(getwd(),"/data/simulations/coverage_prob_grid.Rda"))
 
 #-------------------       coverage probability      ---------------------------
 
