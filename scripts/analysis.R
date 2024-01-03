@@ -12,11 +12,12 @@ load(paste0(getwd(),"/data/simulations/coverage_prob_grid.Rda"))
 # Plot of the coverage probability for confidence interval construction 
 # methods as a function of the sample size
 
+# Plot for analysing an evaluation point
 coverage_prob_n_plot(data = coverage_prob_grid,
                      data_model = "m1",
                      x_point = 0,
                      conf_int_model = c("us","bc","rbc"),
-                     bandwidth_model = c("cv","plug_in_sj",
+                     bandwidth_model = c("plug_in_sj","cv",
                                          "hall_0.3","hall_0.5","hall_0.7",
                                          "plug_in_sj_0.3","plug_in_sj_0.5","plug_in_sj_0.7"
                                          ),
@@ -24,11 +25,31 @@ coverage_prob_n_plot(data = coverage_prob_grid,
                      x_axis_log = FALSE
 )
 
+# Comparing bias correction methods with different bandwidth estimators
 coverage_prob_n_plot_all_points(data = coverage_prob_grid,
                                  data_model = "m1",
-                                 conf_int_model = c("bc","rbc","us"),
-                                 bandwidth_model = c("plug_in_sj", "plug_in_sj_0.7"),
+                                 conf_int_model = c("bc","rbc"),
+                                 bandwidth_model = c("plug_in_sj", "cv"),
                                  kernel = "epanechnikov"
                                  )
+
+# Comparing undersmoothing with different bandwidth estimators
+coverage_prob_n_plot_all_points(data = coverage_prob_grid,
+                                data_model = "m1",
+                                conf_int_model = c("us"),
+                                bandwidth_model = c("hall_0.3","hall_0.5","hall_0.7",
+                                                    "plug_in_sj_0.3","plug_in_sj_0.5","plug_in_sj_0.7"),
+                                kernel = "epanechnikov"
+)
+
+# Comparing best combinations
+coverage_prob_n_plot_all_points(data = coverage_prob_grid,
+                                data_model = "m1",
+                                conf_int_model = c("bc","rbc","us"),
+                                bandwidth_model = c("plug_in_sj",
+                                                    "plug_in_sj_0.7"),
+                                kernel = "epanechnikov"
+)
+
 
 
