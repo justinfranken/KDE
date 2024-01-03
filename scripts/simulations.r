@@ -18,17 +18,17 @@ alpha <- 0.05
 #-------------------       coverage probability      ---------------------------
 
 # Basis for construction of combinations
-data_model = c("m1")
+data_model <- c("m1","m3")
 x_point <- c(4,2,0,-2,-4)
 #n <-  c(seq(25,500,25), seq(750, 5000, 250), seq(5000, 10000, 1000))
 n <- seq(25,500,25)
-kernel = c("epanechnikov")
+kernel <- c("epanechnikov")
 
 # Create a data frame with all combinations
 coverage_prob_grid_1 <- expand.grid(data_model = data_model,
                                     x_point = x_point,
                                     n = n,
-                                    bandwidth_model = c("cv","plug_in_sj"),
+                                    bandwidth_model = c("cv","plug_in_sj","scott","silverman"),
                                     conf_int_model = c("bc","rbc"),
                                     kernel = kernel)
 
@@ -43,8 +43,10 @@ coverage_prob_grid_2 <- expand.grid(data_model = data_model,
 coverage_prob_grid <- rbind(coverage_prob_grid_1,
                             coverage_prob_grid_2)
 
+grid_length <- nrow(coverage_prob_grid)
+
 # Esimtate coverage probability for all combinations
-for (i in c(1:nrow(coverage_prob_grid))){
+for (i in c(1:grid_length)){
   
   param <- coverage_prob_grid[i,]
   
@@ -60,6 +62,7 @@ for (i in c(1:nrow(coverage_prob_grid))){
   
   coverage_prob_grid[i,"coverage_prob"] <- coverage_prob
   
+  print(paste0(i," / ", grid_length))
   print(coverage_prob_grid[i,])
   
 }

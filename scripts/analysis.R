@@ -29,7 +29,7 @@ coverage_prob_n_plot(data = coverage_prob_grid,
 coverage_prob_n_plot_all_points(data = coverage_prob_grid,
                                  data_model = "m1",
                                  conf_int_model = c("bc","rbc"),
-                                 bandwidth_model = c("plug_in_sj", "cv"),
+                                 bandwidth_model = c("plug_in_sj", "cv","silverman","scott"),
                                  kernel = "epanechnikov"
                                  )
 

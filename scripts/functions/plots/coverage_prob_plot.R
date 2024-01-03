@@ -35,7 +35,12 @@ coverage_prob_n_plot <- function(data,
           color = ~combined_model,
           type = 'scatter', 
           mode = 'lines'
-  )  %>%
+  ) %>% add_segments(x = min(data$n), xend = max(data$n), 
+                     y = 0.95, yend = 0.95, color = "grey",
+                     line = list(dash = "dash", color = "grey", width = 0.8),
+                     legendgroup = "ci",
+                     name = "95% CI"
+  ) %>%
     layout(title = list(
       text = paste0("<B>Model = ", data_model,
                     ", x = ",x_point,"<B>"),
@@ -76,14 +81,14 @@ coverage_prob_n_plot_all_points <- function(data,
   ]
   
   data <- data %>% mutate(combined_model = paste0("ci = ",conf_int_model,
-                                                  "\n",
+                                                  ", ",
                                                   "bw = ",bandwidth_model)
   )
   
   annotations = list( 
     list( 
-      x = 0.25,  
-      y = 0.99,  
+      x = 0.23,  
+      y = 1,  
       text = "<B>x = -4<B>",  
       xref = "paper",  
       yref = "paper",  
@@ -92,9 +97,9 @@ coverage_prob_n_plot_all_points <- function(data,
       showarrow = FALSE 
     ),  
     list( 
-      x = 0.75,  
-      y = 0.99,  
-      text = "<B>x =  -2<B>",  
+      x = 0.78,  
+      y = 1,  
+      text = "<B>x =  4<B>",  
       xref = "paper",  
       yref = "paper",  
       xanchor = "center",  
@@ -102,9 +107,9 @@ coverage_prob_n_plot_all_points <- function(data,
       showarrow = FALSE 
     ),  
     list( 
-      x = 0.25,  
-      y = 0.635,  
-      text = "<B>x = 0<B>",  
+      x = 0.23,  
+      y = 0.6,  
+      text = "<B>x = -2<B>",  
       xref = "paper",  
       yref = "paper",  
       xanchor = "center",  
@@ -112,8 +117,8 @@ coverage_prob_n_plot_all_points <- function(data,
       showarrow = FALSE 
     ),
     list( 
-      x = 0.75,  
-      y = 0.635,  
+      x = 0.78,  
+      y = 0.6,  
       text = "<B>x = 2<B>",  
       xref = "paper",  
       yref = "paper",  
@@ -122,9 +127,9 @@ coverage_prob_n_plot_all_points <- function(data,
       showarrow = FALSE 
     ),
     list( 
-      x = 0.25,  
-      y = 0.305,  
-      text = "<B>x = 4<B>",  
+      x = 0.23,  
+      y = 0.26,  
+      text = "<B>x = 0<B>",  
       xref = "paper",  
       yref = "paper",  
       xanchor = "center",  
@@ -133,7 +138,7 @@ coverage_prob_n_plot_all_points <- function(data,
     )
   )
 
-    
+  #----------------  minus 4
   plot_x_minus_4 <- plot_ly(data[data$x_point == -4,], 
                             x = ~n, 
                             y = ~coverage_prob, 
@@ -145,7 +150,44 @@ coverage_prob_n_plot_all_points <- function(data,
   ) %>% add_segments(x = min(data$n), xend = max(data$n), 
                      y = 0.95, yend = 0.95, color = "grey",
                      line = list(dash = "dash", color = "grey", width = 0.8),
-                     name = "95% CI")
+                     legendgroup = "ci",
+                     name = "95% CI"
+   ) %>% layout(xaxis = list(title = list(text = "<B>Sample size<B>",
+                                          font = list(size = 10)),
+                             tickfont = list(size = 10)
+                             ),
+                yaxis = list(title = list(text = "<B>Coverage probability<B>",
+                                          font = list(size = 10)),
+                             tickfont = list(size = 10)
+                             )
+                )
+  
+  #----------------  plus 4
+  
+  plot_x_plus_4 <- plot_ly(data[data$x_point == 4,], 
+                           x = ~n, 
+                           y = ~coverage_prob, 
+                           color = ~combined_model,
+                           type = 'scatter', 
+                           mode = 'lines',
+                           legendgroup = ~combined_model,
+                           showlegend = F
+  ) %>% add_segments(x = min(data$n), xend = max(data$n), 
+                     y = 0.95, yend = 0.95, color = "grey",
+                     line = list(dash = "dash", color = "grey", width = 0.8),
+                     legendgroup = "ci",
+                     name = "95% CI"
+  ) %>% layout(xaxis = list(title = list(text = "<B>Sample size<B>",
+                                         font = list(size = 10)),
+                            tickfont = list(size = 10)
+  ),
+  yaxis = list(title = list(text = "<B>Coverage probability<B>",
+                            font = list(size = 10)),
+               tickfont = list(size = 10)
+  )
+  )
+  
+  #----------------  minus 2
   
   plot_x_minus_2 <- plot_ly(data[data$x_point == -2,], 
                             x = ~n, 
@@ -158,7 +200,44 @@ coverage_prob_n_plot_all_points <- function(data,
   ) %>% add_segments(x = min(data$n), xend = max(data$n), 
                      y = 0.95, yend = 0.95, color = "grey",
                      line = list(dash = "dash", color = "grey", width = 0.8),
-                     name = "95% CI")
+                     legendgroup = "ci",
+                     name = "95% CI"
+  ) %>% layout(xaxis = list(title = list(text = "<B>Sample size<B>",
+                                         font = list(size = 10)),
+                            tickfont = list(size = 10)
+  ),
+  yaxis = list(title = list(text = "<B>Coverage probability<B>",
+                            font = list(size = 10)),
+               tickfont = list(size = 10)
+  )
+  )
+  
+  #----------------  plus 2
+  
+  plot_x_plus_2 <- plot_ly(data[data$x_point == 2,], 
+                           x = ~n, 
+                           y = ~coverage_prob, 
+                           color = ~combined_model,
+                           type = 'scatter', 
+                           mode = 'lines',
+                           legendgroup = ~combined_model,
+                           showlegend = F
+  ) %>% add_segments(x = min(data$n), xend = max(data$n), 
+                     y = 0.95, yend = 0.95, color = "grey",
+                     line = list(dash = "dash", color = "grey", width = 0.8),
+                     legendgroup = "ci",
+                     name = "95% CI"
+  ) %>% layout(xaxis = list(title = list(text = "<B>Sample size<B>",
+                                         font = list(size = 10)),
+                            tickfont = list(size = 10)
+  ),
+  yaxis = list(title = list(text = "<B>Coverage probability<B>",
+                            font = list(size = 10)),
+               tickfont = list(size = 10)
+  )
+  )
+  
+  #----------------  0
   
   plot_x_0 <- plot_ly(data[data$x_point == 0,], 
                       x = ~n, 
@@ -171,34 +250,31 @@ coverage_prob_n_plot_all_points <- function(data,
   ) %>% add_segments(x = min(data$n), xend = max(data$n), 
                      y = 0.95, yend = 0.95, color = "grey",
                      line = list(dash = "dash", color = "grey", width = 0.8),
-                     name = "95% CI")
-  
-  plot_x_plus_2 <- plot_ly(data[data$x_point == 2,], 
-                           x = ~n, 
-                           y = ~coverage_prob, 
-                           color = ~combined_model,
-                           type = 'scatter', 
-                           mode = 'lines',
-                           legendgroup = ~combined_model,
-                           showlegend = F
+                     legendgroup = "ci",
+                     name = "95% CI"
+  ) %>% layout(xaxis = list(title = list(text = "<B>Sample size<B>",
+                                         font = list(size = 10)),
+                            tickfont = list(size = 10)
+  ),
+  yaxis = list(title = list(text = "<B>Coverage probability<B>",
+                            font = list(size = 10)),
+               tickfont = list(size = 10)
+  )
   )
   
-  plot_x_plus_4 <- plot_ly(data[data$x_point == 4,], 
-                           x = ~n, 
-                           y = ~coverage_prob, 
-                           color = ~combined_model,
-                           type = 'scatter', 
-                           mode = 'lines',
-                           legendgroup = ~combined_model,
-                           showlegend = F
-  ) 
+  #----------------  combine subplots
   
   plot <- subplot(plot_x_minus_4,
+                  plot_x_plus_4,
                   plot_x_minus_2,
-                  plot_x_0,
-                  plot_x_minus_2,plot_x_minus_4, 
-                  nrows = 3) %>% 
-    layout(title = paste0("Distribution =  ", data_model), 
+                  plot_x_plus_2,
+                  plot_x_0, 
+                  nrows = 3,
+                  margin = 0.07,
+                  titleX = T,
+                  titleY = T
+                  ) %>% 
+    layout(title = paste0("Distribution =  ", data_model),
            annotations = annotations,
            legend = list(x = 0.5,y = -0.05,
                          orientation = "v"
