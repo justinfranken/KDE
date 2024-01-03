@@ -82,8 +82,8 @@ coverage_prob_n_plot_all_points <- function(data,
   
   annotations = list( 
     list( 
-      x = 0.2,  
-      y = 1.0,  
+      x = 0.25,  
+      y = 0.99,  
       text = "<B>x = -4<B>",  
       xref = "paper",  
       yref = "paper",  
@@ -92,8 +92,8 @@ coverage_prob_n_plot_all_points <- function(data,
       showarrow = FALSE 
     ),  
     list( 
-      x = 0.8,  
-      y = 1,  
+      x = 0.75,  
+      y = 0.99,  
       text = "<B>x =  -2<B>",  
       xref = "paper",  
       yref = "paper",  
@@ -102,8 +102,8 @@ coverage_prob_n_plot_all_points <- function(data,
       showarrow = FALSE 
     ),  
     list( 
-      x = 0.2,  
-      y = 0.63,  
+      x = 0.25,  
+      y = 0.635,  
       text = "<B>x = 0<B>",  
       xref = "paper",  
       yref = "paper",  
@@ -112,8 +112,8 @@ coverage_prob_n_plot_all_points <- function(data,
       showarrow = FALSE 
     ),
     list( 
-      x = 0.8,  
-      y = 0.63,  
+      x = 0.75,  
+      y = 0.635,  
       text = "<B>x = 2<B>",  
       xref = "paper",  
       yref = "paper",  
@@ -122,8 +122,8 @@ coverage_prob_n_plot_all_points <- function(data,
       showarrow = FALSE 
     ),
     list( 
-      x = 0.2,  
-      y = 0.3,  
+      x = 0.25,  
+      y = 0.305,  
       text = "<B>x = 4<B>",  
       xref = "paper",  
       yref = "paper",  
@@ -132,7 +132,8 @@ coverage_prob_n_plot_all_points <- function(data,
       showarrow = FALSE 
     )
   )
-  
+
+    
   plot_x_minus_4 <- plot_ly(data[data$x_point == -4,], 
                             x = ~n, 
                             y = ~coverage_prob, 
@@ -141,7 +142,10 @@ coverage_prob_n_plot_all_points <- function(data,
                             mode = 'lines',
                             legendgroup = ~combined_model,
                             showlegend = F
-  ) 
+  ) %>% add_segments(x = min(data$n), xend = max(data$n), 
+                     y = 0.95, yend = 0.95, color = "grey",
+                     line = list(dash = "dash", color = "grey", width = 0.8),
+                     name = "95% CI")
   
   plot_x_minus_2 <- plot_ly(data[data$x_point == -2,], 
                             x = ~n, 
@@ -151,7 +155,10 @@ coverage_prob_n_plot_all_points <- function(data,
                             mode = 'lines',
                             legendgroup = ~combined_model,
                             showlegend = F
-  ) 
+  ) %>% add_segments(x = min(data$n), xend = max(data$n), 
+                     y = 0.95, yend = 0.95, color = "grey",
+                     line = list(dash = "dash", color = "grey", width = 0.8),
+                     name = "95% CI")
   
   plot_x_0 <- plot_ly(data[data$x_point == 0,], 
                       x = ~n, 
@@ -161,7 +168,10 @@ coverage_prob_n_plot_all_points <- function(data,
                       mode = 'lines',
                       legendgroup = ~combined_model,
                       showlegend = T
-  ) 
+  ) %>% add_segments(x = min(data$n), xend = max(data$n), 
+                     y = 0.95, yend = 0.95, color = "grey",
+                     line = list(dash = "dash", color = "grey", width = 0.8),
+                     name = "95% CI")
   
   plot_x_plus_2 <- plot_ly(data[data$x_point == 2,], 
                            x = ~n, 
@@ -171,7 +181,7 @@ coverage_prob_n_plot_all_points <- function(data,
                            mode = 'lines',
                            legendgroup = ~combined_model,
                            showlegend = F
-  ) 
+  )
   
   plot_x_plus_4 <- plot_ly(data[data$x_point == 4,], 
                            x = ~n, 
