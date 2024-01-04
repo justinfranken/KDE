@@ -64,7 +64,7 @@ bandwidth_hall <- function(x,lambda = 0.1){
   ##############################################################################
   
   n <- length(x)
-  bw <- lambda * n^(1/5)
+  bw <- lambda * n^(-1/5)
   
   return(bw)
 }

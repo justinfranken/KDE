@@ -99,7 +99,10 @@ coverage_for_simulation_step <- function(n,
   # evaluate coverage of simulation step
   check_coverage <- (conf_int[1]  <= f_point) & (f_point <= conf_int[2])  
   
-  return(check_coverage)
+  return(list(check_coverage = check_coverage,
+              ci_lower = conf_int[1],
+              ci_upper = conf_int[2])
+         )
 }
 
 coverage_for_n <- function(n,
@@ -111,9 +114,7 @@ coverage_for_n <- function(n,
                           kernel,
                           alpha){
   
-  simulations <- sapply((1:S),function(s){
-    
-    #if (s %% 100 == 0){cat("Simulations:",s,"\n")}
+  simulations <- lapply((1:S),function(s){
     
     coverage <- coverage_for_simulation_step(n,
                                              x_point,
@@ -127,11 +128,13 @@ coverage_for_n <- function(n,
     
   })
   
-  coverage_prob <- mean(simulations)
+  simulations <- bind_rows(simulations)
   
-  #cat("Coverage probability:",coverage_prob,"\n")
-  
-  return(coverage_prob)
+  return(list(coverage_prob = mean(simulations$check_coverage),
+              ci_lower = mean(simulations$ci_lower),
+              ci_upper = mean(simulations$ci_upper)
+              )
+         )
 }
 
 

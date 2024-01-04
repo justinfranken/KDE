@@ -25,15 +25,20 @@ coverage_prob_n_plot(data = coverage_prob_grid,
                      x_axis_log = FALSE
 )
 
-# Comparing bias correction methods with different bandwidth estimators
+# Robust Bias correction with different bandwidth estimators
 coverage_prob_n_plot_all_points(data = coverage_prob_grid,
-                                 data_model = "m1",
-                                 conf_int_model = c("bc","rbc"),
-                                 bandwidth_model = c("plug_in_sj", "cv","silverman","scott"),
-                                 kernel = "epanechnikov"
-                                 )
+                                data_model = "m1",
+                                conf_int_model = c("rbc"),
+                                bandwidth_model = c("plug_in_sj", "cv","silverman","scott"),
+                                kernel = "epanechnikov"
+)
+# -> Three observations
+#      (1) Evaluation point effects coverage probability
+#      (2) Coverage probability at 95% for higher n
+#      (3) Bandwidth estimators play a minor role (for coverage probability, 
+#          but probably for interval length)
 
-# Comparing undersmoothing with different bandwidth estimators
+# Undersmoothing with different bandwidth estimators
 coverage_prob_n_plot_all_points(data = coverage_prob_grid,
                                 data_model = "m1",
                                 conf_int_model = c("us"),
@@ -41,15 +46,35 @@ coverage_prob_n_plot_all_points(data = coverage_prob_grid,
                                                     "plug_in_sj_0.3","plug_in_sj_0.5","plug_in_sj_0.7"),
                                 kernel = "epanechnikov"
 )
+# -> Two central observation
+#      (1) Evaluation point effects coverage probability
+#      (2) Coverage probability at 95% for higher n
+#      (3) Bandwidth estimators play a larger role 
+
+# Bias correction with different bandwidth estimators
+coverage_prob_n_plot_all_points(data = coverage_prob_grid,
+                                data_model = "m1",
+                                conf_int_model = c("bc"),
+                                bandwidth_model = c("plug_in_sj", "cv","silverman","scott"),
+                                kernel = "epanechnikov"
+)
+# -> One central observation
+#      (1) We have no valid construction of confidence interval's,
+#          since rho does not go to zero
+
 
 # Comparing best combinations
 coverage_prob_n_plot_all_points(data = coverage_prob_grid,
                                 data_model = "m1",
                                 conf_int_model = c("bc","rbc","us"),
                                 bandwidth_model = c("plug_in_sj",
+                                                    "cv",
+                                                    "plug_in_sj_0.3",
+                                                    "plug_in_sj_0.5",
                                                     "plug_in_sj_0.7"),
                                 kernel = "epanechnikov"
 )
 
+#-------------------         interval length         ---------------------------
 
 
