@@ -138,8 +138,8 @@ coverage_prob_n_plot_all_points <- function(data,
     )
   )
 
-  #----------------  minus 4
-  plot_x_minus_4 <- plot_ly(data[data$x_point == -2,], 
+  #----------------  minus 2
+  plot_x_minus_2 <- plot_ly(data[data$x_point == -2,], 
                             x = ~n, 
                             y = ~coverage_prob, 
                             color = ~combined_model,
@@ -162,9 +162,9 @@ coverage_prob_n_plot_all_points <- function(data,
                              )
                 )
   
-  #----------------  plus 4
+  #----------------  plus 2
   
-  plot_x_plus_4 <- plot_ly(data[data$x_point == 2,], 
+  plot_x_plus_2 <- plot_ly(data[data$x_point == 2,], 
                            x = ~n, 
                            y = ~coverage_prob, 
                            color = ~combined_model,
@@ -187,9 +187,9 @@ coverage_prob_n_plot_all_points <- function(data,
   )
   )
   
-  #----------------  minus 2
+  #----------------  minus 1
   
-  plot_x_minus_2 <- plot_ly(data[data$x_point == -1,], 
+  plot_x_minus_1 <- plot_ly(data[data$x_point == -1,], 
                             x = ~n, 
                             y = ~coverage_prob, 
                             color = ~combined_model,
@@ -212,9 +212,9 @@ coverage_prob_n_plot_all_points <- function(data,
   )
   )
   
-  #----------------  plus 2
+  #----------------  plus 1
   
-  plot_x_plus_2 <- plot_ly(data[data$x_point == 1,], 
+  plot_x_plus_1 <- plot_ly(data[data$x_point == 1,], 
                            x = ~n, 
                            y = ~coverage_prob, 
                            color = ~combined_model,
@@ -264,10 +264,10 @@ coverage_prob_n_plot_all_points <- function(data,
   
   #----------------  combine subplots
   
-  plot <- subplot(plot_x_minus_4,
-                  plot_x_plus_4,
-                  plot_x_minus_2,
+  plot <- subplot(plot_x_minus_2,
                   plot_x_plus_2,
+                  plot_x_minus_1,
+                  plot_x_plus_1,
                   plot_x_0, 
                   nrows = 3,
                   margin = 0.07,
