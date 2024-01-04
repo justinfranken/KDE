@@ -89,7 +89,7 @@ coverage_prob_n_plot_all_points <- function(data,
     list( 
       x = 0.23,  
       y = 1,  
-      text = "<B>x = -4<B>",  
+      text = "<B>x = -2<B>",  
       xref = "paper",  
       yref = "paper",  
       xanchor = "center",  
@@ -99,7 +99,7 @@ coverage_prob_n_plot_all_points <- function(data,
     list( 
       x = 0.78,  
       y = 1,  
-      text = "<B>x =  4<B>",  
+      text = "<B>x =  2<B>",  
       xref = "paper",  
       yref = "paper",  
       xanchor = "center",  
@@ -109,7 +109,7 @@ coverage_prob_n_plot_all_points <- function(data,
     list( 
       x = 0.23,  
       y = 0.6,  
-      text = "<B>x = -2<B>",  
+      text = "<B>x = -1<B>",  
       xref = "paper",  
       yref = "paper",  
       xanchor = "center",  
@@ -119,7 +119,7 @@ coverage_prob_n_plot_all_points <- function(data,
     list( 
       x = 0.78,  
       y = 0.6,  
-      text = "<B>x = 2<B>",  
+      text = "<B>x = 1<B>",  
       xref = "paper",  
       yref = "paper",  
       xanchor = "center",  
@@ -139,7 +139,7 @@ coverage_prob_n_plot_all_points <- function(data,
   )
 
   #----------------  minus 4
-  plot_x_minus_4 <- plot_ly(data[data$x_point == -4,], 
+  plot_x_minus_4 <- plot_ly(data[data$x_point == -2,], 
                             x = ~n, 
                             y = ~coverage_prob, 
                             color = ~combined_model,
@@ -164,7 +164,7 @@ coverage_prob_n_plot_all_points <- function(data,
   
   #----------------  plus 4
   
-  plot_x_plus_4 <- plot_ly(data[data$x_point == 4,], 
+  plot_x_plus_4 <- plot_ly(data[data$x_point == 2,], 
                            x = ~n, 
                            y = ~coverage_prob, 
                            color = ~combined_model,
@@ -189,7 +189,7 @@ coverage_prob_n_plot_all_points <- function(data,
   
   #----------------  minus 2
   
-  plot_x_minus_2 <- plot_ly(data[data$x_point == -2,], 
+  plot_x_minus_2 <- plot_ly(data[data$x_point == -1,], 
                             x = ~n, 
                             y = ~coverage_prob, 
                             color = ~combined_model,
@@ -214,7 +214,7 @@ coverage_prob_n_plot_all_points <- function(data,
   
   #----------------  plus 2
   
-  plot_x_plus_2 <- plot_ly(data[data$x_point == 2,], 
+  plot_x_plus_2 <- plot_ly(data[data$x_point == 1,], 
                            x = ~n, 
                            y = ~coverage_prob, 
                            color = ~combined_model,
