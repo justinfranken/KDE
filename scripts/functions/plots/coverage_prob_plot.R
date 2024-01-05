@@ -275,7 +275,7 @@ coverage_prob_n_plot_all_points <- function(data,
                   titleX = T,
                   titleY = T
   ) %>% 
-    layout(title = paste0("Distribution =  ", data_model),
+    layout(title = paste0("Model ", substring(data_model,2,2)),
            annotations = annotations,
            legend = list(x = 0.5,y = -0.05,
                          orientation = "v"

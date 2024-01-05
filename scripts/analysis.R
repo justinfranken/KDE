@@ -17,7 +17,7 @@ load(paste0(getwd(),"/data/simulations/coverage_prob_grid.Rda"))
 coverage_prob_n_plot(data = coverage_prob_grid,
                      data_model = "m1",
                      x_point = 0,
-                     conf_int_model = c("us","bc","rbc"),
+                     conf_int_model = c("bc","rbc","us"),
                      bandwidth_model = c("plug_in_sj","cv",
                                          "hall_0.3","hall_0.5","hall_0.7"),
                      kernel = "epanechnikov",
@@ -75,7 +75,7 @@ coverage_prob_n_plot_all_points(data = coverage_prob_grid,
 
 # Robust Bias correction with different bandwidth estimators
 interval_length_n_plot_all_points(data = coverage_prob_grid,
-                                data_model = "m3",
+                                data_model = "m1",
                                 conf_int_model = c("rbc"),
                                 bandwidth_model = c("plug_in_sj", "cv","silverman","scott"),
                                 kernel = "epanechnikov"
@@ -83,6 +83,7 @@ interval_length_n_plot_all_points(data = coverage_prob_grid,
 # -> One central observation
 #      (1) Scott is superior
 
+# undersmoothing 
 interval_length_n_plot_all_points(data = coverage_prob_grid,
                                 data_model = "m1",
                                 conf_int_model = c("us"),
