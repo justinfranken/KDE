@@ -52,8 +52,6 @@ conf_int_us <- kde_us$ci[["us"]]
 
 #--------------------------           plot            --------------------------
 
-
-
 plot_ly() %>%
   add_trace(x = eval_points,
             y = f_rbc,
@@ -88,7 +86,7 @@ plot_ly() %>%
             fill = "toself"
   ) %>%
   layout(title = 'Kernel Density Estimation of Family Income After Taxes',
-         xaxis = list(title = '<B>Income<B>'),
+         xaxis = list(title = '<B>Income<B>', tickvals = seq(0,700,25)*1000),
          yaxis = list(title = '<B>Estimated Density<B>', tickformat = ".4%")
   ) 
 
