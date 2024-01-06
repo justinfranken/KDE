@@ -61,7 +61,7 @@ plot_ly() %>%
             type = 'scatter',
             mode = 'lines',
             name = "Robust bias correction",
-            colors = "royalblue"
+            line = list(color = "skyblue2")
             ) %>%
   add_trace(x = c(eval_points,rev(eval_points)),
             y = c(conf_int_rbc$lower, rev(conf_int_rbc$upper)),
@@ -69,7 +69,7 @@ plot_ly() %>%
             mode = 'lines',
             name = "CI 95% (RBC)",
             line = list(width = 0),
-            fillcolor = "rgba(65, 105, 225, 0.2)", 
+            fillcolor = "rgba(65, 105, 225, 0.3)", 
             fill = "toself"
             ) %>%
   add_trace(x = eval_points,
@@ -85,13 +85,13 @@ plot_ly() %>%
             mode = 'lines',
             name = "CI 95% (US)",
             line = list(width = 0),
-            fillcolor = "rgba(178, 34, 34, 0.1)", 
+            fillcolor = "rgba(178, 34, 34, 0.2)", 
             fill = "toself"
   ) %>%
   layout(title = 'Kernel Density Estimation of Family Income After Taxes',
          xaxis = list(title = '<B>Income<B>', tickvals = seq(0,700,25)*1000),
          yaxis = list(title = '<B>Estimated Density<B>', tickformat = ".4%"),
-         legend = list(x = 0.5,y = -0.1,
+         legend = list(x = 0.5, y = 1,
                        orientation = "h")
   ) 
 
