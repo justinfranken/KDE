@@ -17,33 +17,80 @@ data <- extract_data(
     target_column = columns_of_interest
 )
 
+#----------------------         eval points           --------------------------
 
-# kernel density estimation
+x <- data$FamilyIncomeAfterTaxes
+eval_points <- seq(mind(x),max(x),length.out = 200)
 
-h_silverman <- bandwidth_silverman(data$FamilyIncomeAfterTaxes)
+#--------------------------            rbc            --------------------------
 
-eval_points <- seq(min(data$FamilyIncomeAfterTaxes),
-                max(data$FamilyIncomeAfterTaxes),
-                length.out = 200)
+kde_rbc <- kde(x = x,
+               eval = eval_points,
+               h = bandwidth_scott(x),
+               kernel = "epanechnikov",
+               ci = c("rbc"),
+               alpha = 0.05
+               )
 
-kde_result <- kde(x = data$FamilyIncomeAfterTaxes,
-                eval = eval_points,
-                h = h_silverman)
+f_rbc<- kde_rbc$f_m
 
-# plot
-kde_family_income_plot <- plot_ly(x = kde_result$eval,
-                            y = kde_result$f_k,
-                            type = 'scatter',
-                            mode = 'lines') %>%
-                            layout(title = 'Kernel Density Estimation of Family Income After Taxes',
-                                xaxis = list(title = 'Income'),
-                                yaxis = list(title = 'Density'))
+conf_int_rbc<- kde_rbc$ci[["rbc"]]
 
-kde_family_income_plot
+#--------------------------            us            --------------------------
 
-# confidence intervals
-alpha = 0.05
-conf_intervals <- kde(x = data$FamilyIncomeAfterTaxes,
-                    eval = eval_points,
-                    h = h_silverman,
-                    alpha = alpha)$ci
+kde_us <- kde(x = x,
+               eval = eval_points,
+               h = bandwidth_scott(x) * 0.7,
+               kernel = "epanechnikov",
+               ci = c("us"),
+               alpha = 0.05
+)
+
+f_us <- kde_us$f_k
+
+conf_int_us <- kde_us$ci[["us"]]
+
+#--------------------------           plot            --------------------------
+
+
+
+plot_ly() %>%
+  add_trace(x = eval_points,
+            y = f_rbc,
+            type = 'scatter',
+            mode = 'lines',
+            name = "Robust bias correction",
+            colors = "royalblue"
+            ) %>%
+  add_trace(x = c(eval_points,rev(eval_points)),
+            y = c(conf_int_rbc$lower, rev(conf_int_rbc$upper)),
+            type = 'scatter',
+            mode = 'lines',
+            name = "CI 95% (RBC)",
+            line = list(width = 0),
+            fillcolor = "rgba(65, 105, 225, 0.2)", 
+            fill = "toself"
+            ) %>%
+  add_trace(x = eval_points,
+            y = f_us,
+            type = 'scatter',
+            mode = 'lines',
+            name = "Undersmoothing",
+            line  = list(color = "#FF8247")
+  ) %>%
+  add_trace(x = c(eval_points,rev(eval_points)),
+            y = c(conf_int_us$lower, rev(conf_int_us$upper)),
+            type = 'scatter',
+            mode = 'lines',
+            name = "CI 95% (US)",
+            line = list(width = 0),
+            fillcolor = "rgba(178, 34, 34, 0.1)", 
+            fill = "toself"
+  ) %>%
+  layout(title = 'Kernel Density Estimation of Family Income After Taxes',
+         xaxis = list(title = '<B>Income<B>'),
+         yaxis = list(title = '<B>Estimated Density<B>', tickformat = ".4%")
+  ) 
+
+
+

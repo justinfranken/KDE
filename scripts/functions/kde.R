@@ -86,15 +86,18 @@ kde <- function( x,
   z <- qnorm(1-alpha/2, mean = 0, sd = 1)
   
   if ("bc" %in% ci){
-    out$ci$bc <- c(f_m - z * sd_f_k_hat, f_m + z * sd_f_k_hat)
+    out$ci$bc <- list(lower = f_m - z * sd_f_k_hat, 
+                      upper = f_m + z * sd_f_k_hat)
   }
   
   if ("rbc" %in% ci){
-    out$ci$rbc <- c(f_m - z * sd_f_m_hat , f_m + z * sd_f_m_hat)
+    out$ci$rbc <- list(lower = f_m - z * sd_f_m_hat, 
+                       upper = f_m + z * sd_f_m_hat)
   }
   
   if ("us" %in% ci){
-    out$ci$us <- c(f_k - z * sd_f_k_hat, f_k + z * sd_f_k_hat) 
+    out$ci$us <- list(lower = f_k - z * sd_f_k_hat, 
+                      upper = f_k + z * sd_f_k_hat) 
   }
   
   return(out)

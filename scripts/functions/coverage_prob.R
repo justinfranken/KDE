@@ -91,17 +91,16 @@ coverage_for_simulation_step <- function(n,
     
   #-----------------------------------------------------------------------------
   # select confidence interval model 
-  conf_int_list <- kde(x = x, eval = x_point, h = h, kernel = kernel, ci = conf_int_model, alpha = alpha)$ci
-  
-  conf_int <- unlist(conf_int_list)
+  conf_int <- kde(x = x, eval = x_point, h = h, kernel = kernel, ci = conf_int_model, alpha = alpha
+                  )$ci[[conf_int_model]]
   
   #-----------------------------------------------------------------------------
   # evaluate coverage of simulation step
-  check_coverage <- (conf_int[1]  <= f_point) & (f_point <= conf_int[2])  
+  check_coverage <- (conf_int$lower  <= f_point) & (f_point <= conf_int$upper)  
   
   return(list(check_coverage = check_coverage,
-              ci_lower = conf_int[1],
-              ci_upper = conf_int[2])
+              ci_lower = conf_int$lower,
+              ci_upper = conf_int$upper)
          )
 }
 
