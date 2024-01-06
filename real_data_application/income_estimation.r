@@ -17,10 +17,13 @@ data <- extract_data(
     target_column = columns_of_interest
 )
 
-#----------------------         eval points           --------------------------
+#------------------         select distribution           ----------------------
 
 x <- data$FamilyIncomeAfterTaxes
-eval_points <- seq(mind(x),max(x),length.out = 200)
+
+#----------------------         eval points           --------------------------
+
+eval_points <- seq(min(x),max(x),length.out = 200)
 
 #--------------------------            rbc            --------------------------
 
@@ -87,7 +90,9 @@ plot_ly() %>%
   ) %>%
   layout(title = 'Kernel Density Estimation of Family Income After Taxes',
          xaxis = list(title = '<B>Income<B>', tickvals = seq(0,700,25)*1000),
-         yaxis = list(title = '<B>Estimated Density<B>', tickformat = ".4%")
+         yaxis = list(title = '<B>Estimated Density<B>', tickformat = ".4%"),
+         legend = list(x = 0.5,y = -0.1,
+                       orientation = "h")
   ) 
 
 
