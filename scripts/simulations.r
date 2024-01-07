@@ -34,9 +34,9 @@ coverage_prob_grid_1 <- expand.grid(data_model = data_model,
 coverage_prob_grid_2 <- expand.grid(data_model = data_model,
                                     x_point = x_point,
                                     n = n,
-                                    bandwidth_model = c("hall_0.3","hall_0.5","hall_0.7",
-                                                        "plug_in_sj_0.3","plug_in_sj_0.5","plug_in_sj_0.7",
-                                                        "plug_in_sj"),
+                                    bandwidth_model = c("silverman_0.1","silverman_0.3",
+                                                        "silverman_0.5","silverman_0.7",
+                                                        "silverman_1.0"),
                                     conf_int_model = c("us"),
                                     kernel = kernel)
 
