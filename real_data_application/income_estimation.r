@@ -43,7 +43,7 @@ conf_int_rbc<- kde_rbc$ci[["rbc"]]
 
 kde_us <- kde(x = x,
                eval = eval_points,
-               h = bandwidth_scott(x) * 0.7,
+               h = bandwidth_silverman(x),
                kernel = "epanechnikov",
                ci = c("us"),
                alpha = 0.05
@@ -88,11 +88,11 @@ plot_ly() %>%
             fillcolor = "rgba(178, 34, 34, 0.2)", 
             fill = "toself"
   ) %>%
-  layout(title = paste0('Kernel Density Estimation of Family Income After Taxes (n = ', 
-                        length(x),")"),
+  layout(title = paste0('<B>Kernel Density Estimation of Family Income After Taxes (n = ', 
+                        length(x),")<B>"),
          xaxis = list(title = '<B>Income<B>', tickvals = seq(0,700,25)*1000),
          yaxis = list(title = '<B>Estimated Density<B>', tickformat = ".4%"),
-         legend = list(x = 0.5, y = 1,
+         legend = list(x = 0.15, y = 1,
                        orientation = "h")
   ) 
 

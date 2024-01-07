@@ -113,7 +113,7 @@ interval_length_n_plot_all_points(data = coverage_prob_grid,
 interval_length_n_plot_all_points(data = coverage_prob_grid,
                                 data_model = "m1",
                                 conf_int_model = c("rbc","us"),
-                                bandwidth_model = c("silverman","cv"),
+                                bandwidth_model = c("silverman_1.0","cv"),
                                 kernel = "epanechnikov"
 )
 
