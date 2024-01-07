@@ -88,7 +88,8 @@ plot_ly() %>%
             fillcolor = "rgba(178, 34, 34, 0.2)", 
             fill = "toself"
   ) %>%
-  layout(title = 'Kernel Density Estimation of Family Income After Taxes',
+  layout(title = paste0('Kernel Density Estimation of Family Income After Taxes (n = ', 
+                        length(x),")"),
          xaxis = list(title = '<B>Income<B>', tickvals = seq(0,700,25)*1000),
          yaxis = list(title = '<B>Estimated Density<B>', tickformat = ".4%"),
          legend = list(x = 0.5, y = 1,

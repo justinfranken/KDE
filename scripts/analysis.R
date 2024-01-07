@@ -19,7 +19,7 @@ coverage_prob_n_plot(data = coverage_prob_grid,
                      x_point = 0,
                      conf_int_model = c("bc","rbc","us"),
                      bandwidth_model = c("plug_in_sj","cv",
-                                         "hall_0.3","hall_0.5","hall_0.7"),
+                                         "silverman"),
                      kernel = "epanechnikov",
                      x_axis_log = FALSE
 )
@@ -45,7 +45,9 @@ coverage_prob_n_plot_all_points(data = coverage_prob_grid,
 coverage_prob_n_plot_all_points(data = coverage_prob_grid,
                                 data_model = "m1",
                                 conf_int_model = c("us"),
-                                bandwidth_model = c("hall_0.3","hall_0.5","hall_0.7"),
+                                bandwidth_model =c("silverman_0.1","silverman_0.3",
+                                                   "silverman_0.5","silverman_0.7",
+                                                   "silverman_1.0"),
                                 kernel = "epanechnikov"
 )
 # -> One main observation
@@ -74,7 +76,7 @@ coverage_prob_n_plot_all_points(data = coverage_prob_grid,
                                 data_model = "m1",
                                 conf_int_model = c("bc","rbc","us"),
                                 bandwidth_model = c("cv",
-                                                    "hall_0.7"
+                                                    "silverman"
                                                     ),
                                 kernel = "epanechnikov"
 )
@@ -98,19 +100,20 @@ interval_length_n_plot_all_points(data = coverage_prob_grid,
 interval_length_n_plot_all_points(data = coverage_prob_grid,
                                 data_model = "m1",
                                 conf_int_model = c("us"),
-                                bandwidth_model = c("hall_0.3","hall_0.5","hall_0.7"),
+                                bandwidth_model =c("silverman_0.1","silverman_0.3",
+                                                   "silverman_0.5","silverman_0.7",
+                                                   "silverman_1.0"),                      
                                 kernel = "epanechnikov"
 )
 # -> One main observation
-#      (1) Hall_0.7 is superior for Model 1-4
-#          Explanation: a higher bandwidth leads to a lower variance
+#      (1) Silverman_1.0 is superior for Model 1-4
 
 
 #--------------   Best models
 interval_length_n_plot_all_points(data = coverage_prob_grid,
                                 data_model = "m1",
                                 conf_int_model = c("rbc","us"),
-                                bandwidth_model = c("hall_0.7","scott"),
+                                bandwidth_model = c("silverman","cv"),
                                 kernel = "epanechnikov"
 )
 

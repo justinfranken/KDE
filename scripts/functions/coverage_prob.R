@@ -68,27 +68,22 @@ coverage_for_simulation_step <- function(n,
   }
   
   # halls rule for undersmoothing with different lambdas 
-  if(bandwidth_model == "hall_0.3"){
-    h <- bandwidth_hall(x, lambda = 0.3)
+  if(bandwidth_model == "silverman_0.1"){
+    h <- 0.1 * bandwidth_silverman(x)
   }
-  if(bandwidth_model == "hall_0.5"){
-    h <- bandwidth_hall(x, lambda = 0.5)
-  }   
-  if(bandwidth_model == "hall_0.7"){
-    h <- bandwidth_hall(x, lambda = 0.7)
-  } 
   
-  # explorative bandwidth ideas for undersmoothing
-  if(bandwidth_model == "plug_in_sj_0.3"){
-    h <- 0.3 * bandwidth_plug_in_sj(x)
+  if(bandwidth_model == "silverman_0.3"){
+    h <- 0.3 * bandwidth_silverman(x)
   }
-  if(bandwidth_model == "plug_in_sj_0.5"){
-    h <- 0.5 * bandwidth_plug_in_sj(x)
-  }
-  if(bandwidth_model == "plug_in_sj_0.7"){
-    h <- 0.7 * bandwidth_plug_in_sj(x)
-  }
-    
+  if(bandwidth_model == "silverman_0.5"){
+    h <- 0.5 * bandwidth_silverman(x)
+  }   
+  if(bandwidth_model == "silverman_0.7"){
+    h <- 0.7 * bandwidth_silverman(x)
+  } 
+  if(bandwidth_model == "silverman_1.0"){
+    h <- bandwidth_silverman(x)
+  } 
   #-----------------------------------------------------------------------------
   # select confidence interval model 
   conf_int <- kde(x = x, eval = x_point, h = h, kernel = kernel, ci = conf_int_model, alpha = alpha

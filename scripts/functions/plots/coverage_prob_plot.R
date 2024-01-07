@@ -86,6 +86,13 @@ coverage_prob_n_plot_all_points <- function(data,
                                                   "bw = ",bandwidth_model)
   )
   
+  #floor(min(data$coverage_prob)*10)/10
+  #y_axis_range <- c(0.5,1)
+  #y_axis_tickvals <- seq(0.5,1,0.1)
+  
+  y_axis_range <- NA
+  y_axis_tickvals <- NA
+
   annotations = list( 
     list( 
       x = 0.23,  
