@@ -9,7 +9,9 @@ coverage_for_simulation_step <- function(n,
   
   #-----------------------------------------------------------------------------
   # Select data generating process
-  data <- data_generator(data_model,x_point)
+  data <- data_generator(data_model = data_model,
+                         n = n,
+                         x_point = x_point)
   
   # save simulated distribution in x
   x <- data$x
