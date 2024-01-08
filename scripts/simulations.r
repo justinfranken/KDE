@@ -5,6 +5,7 @@ source(paste0(getwd(),"/scripts/lib.r"))
 source(paste0(getwd(),"/scripts/functions/kernel.r"))
 source(paste0(getwd(),"/scripts/functions/bandwidth_selection.r"))
 source(paste0(getwd(),"/scripts/functions/kde.r"))
+source(paste0(getwd(),"/scripts/functions/data_generator.r"))
 source(paste0(getwd(),"/scripts/functions/coverage_prob.r"))
 
 # set seed for reproducibility
