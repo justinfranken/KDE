@@ -28,7 +28,7 @@ kernel <- c("epanechnikov")
 coverage_prob_grid_1 <- expand.grid(data_model = data_model,
                                     x_point = x_point,
                                     n = n,
-                                    bandwidth_model = c("cv","plug_in_sj","scott","silverman"),
+                                    bandwidth_model = c("cv","plug_in_sj","silverman"),
                                     conf_int_model = c("bc","rbc"),
                                     kernel = kernel)
 
@@ -48,20 +48,21 @@ grid_length <- nrow(coverage_prob_grid)
 
 tic()
 
-# Esimtate coverage probability for all combinations
+# Estimate coverage probability for all combinations
 for (i in c(1:grid_length)){
   
   param <- coverage_prob_grid[i,]
   
   coverage <- coverage_for_n(
-                   n = param$n,
-                   S = S, 
-                   data_model = param$data_model,
-                   x_point = param$x_point, 
-                   bandwidth_model = param$bandwidth_model ,
-                   conf_int_model = param$conf_int_model,
-                   kernel = param$kernel,
-                   alpha = alpha)
+                   n = as.integer(param$n),
+                   S = as.integer(S), 
+                   data_model = as.character(param$data_model),
+                   x_point = as.integer(param$x_point), 
+                   bandwidth_model = as.character(param$bandwidth_model),
+                   conf_int_model = as.character(param$conf_int_model),
+                   kernel = as.character(param$kernel),
+                   alpha = as.numeric(alpha)
+                   )
   
   coverage_prob_grid[i,"coverage_prob"] <- coverage$coverage_prob
   coverage_prob_grid[i,"ci_lower"] <- coverage$ci_lower

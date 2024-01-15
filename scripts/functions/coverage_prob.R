@@ -36,9 +36,6 @@ coverage_for_simulation_step <- function(n,
   }
   
   # rule of thumb methods
-  if(bandwidth_model == "scott"){
-    h <- bandwidth_scott(x)
-  }
   if(bandwidth_model == "silverman"){
     h <- bandwidth_silverman(x)
   }

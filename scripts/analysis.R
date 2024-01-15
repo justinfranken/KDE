@@ -28,7 +28,7 @@ coverage_prob_n_plot(data = coverage_prob_grid,
 coverage_prob_n_plot_all_points(data = coverage_prob_grid,
                                 data_model = "m1",
                                 conf_int_model = c("rbc"),
-                                bandwidth_model = c("plug_in_sj", "cv","silverman","scott"),
+                                bandwidth_model = c("plug_in_sj", "cv","silverman"),
                                 kernel = "epanechnikov"
 )
 
@@ -52,11 +52,9 @@ coverage_prob_n_plot_all_points(data = coverage_prob_grid,
 )
 # -> One main observation
 #      (1) Bandwidth estimators play a larger role 
-#             - Lowering lambda can reduce bias but increases the variance of f_k
-#               especially if n is small
-#      (2) General Problem: How do choose lambda in practice? Since true distribution
+#             - Explanation: Small sample size leads to f_k = 0, when h is too small
+#      (3) General Problem: How do choose lambda in practice? Since true distribution
 #          is not available?
-#             - For Model 1-4, we see a faster convergence for lambda = 0.7
 
 #--------------   BC 
 coverage_prob_n_plot_all_points(data = coverage_prob_grid,
@@ -74,46 +72,21 @@ coverage_prob_n_plot_all_points(data = coverage_prob_grid,
 #--------------   Best models
 coverage_prob_n_plot_all_points(data = coverage_prob_grid,
                                 data_model = "m1",
-                                conf_int_model = c("bc","rbc","us"),
+                                conf_int_model = c("rbc","us"),
                                 bandwidth_model = c("cv",
-                                                    "silverman"
+                                                    "silverman_1.0"
                                                     ),
                                 kernel = "epanechnikov"
 )
 
-# -> One main observation
-#      (1) Convergence of rbc seems to be faster in comparison to us
-
 #-------------------         interval length         ---------------------------
-
-#--------------   RBC
-interval_length_n_plot_all_points(data = coverage_prob_grid,
-                                data_model = "m1",
-                                conf_int_model = c("rbc"),
-                                bandwidth_model = c("plug_in_sj", "cv","silverman","scott"),
-                                kernel = "epanechnikov"
-)
-# -> One cmain observation
-#      (1) Scott is superior for Model 1-4
-
-#--------------   US
-interval_length_n_plot_all_points(data = coverage_prob_grid,
-                                data_model = "m1",
-                                conf_int_model = c("us"),
-                                bandwidth_model =c("silverman_0.1","silverman_0.3",
-                                                   "silverman_0.5","silverman_0.7",
-                                                   "silverman_1.0"),                      
-                                kernel = "epanechnikov"
-)
-# -> One main observation
-#      (1) Silverman_1.0 is superior for Model 1-4
-
 
 #--------------   Best models
 interval_length_n_plot_all_points(data = coverage_prob_grid,
                                 data_model = "m1",
                                 conf_int_model = c("rbc","us"),
-                                bandwidth_model = c("silverman_1.0","cv"),
+                                bandwidth_model = c("silverman_1.0",
+                                                    "cv"),
                                 kernel = "epanechnikov"
 )
 
