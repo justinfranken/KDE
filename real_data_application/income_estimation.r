@@ -29,7 +29,7 @@ eval_points <- seq(min(x),max(x),length.out = 200)
 
 kde_rbc <- kde(x = x,
                eval = eval_points,
-               h = bandwidth_scott(x),
+               h = bandwidth_cv(x),
                kernel = "epanechnikov",
                ci = c("rbc"),
                alpha = 0.05
@@ -60,14 +60,14 @@ plot_ly() %>%
             y = f_rbc,
             type = 'scatter',
             mode = 'lines',
-            name = "Robust bias correction",
+            name = "Bias corrected estimate (bandwidth = Cross Validation)",
             line = list(color = "skyblue2")
             ) %>%
   add_trace(x = c(eval_points,rev(eval_points)),
             y = c(conf_int_rbc$lower, rev(conf_int_rbc$upper)),
             type = 'scatter',
             mode = 'lines',
-            name = "CI 95% (RBC)",
+            name = "95%-CI (using the variance of the bias corrected estimate)",
             line = list(width = 0),
             fillcolor = "rgba(65, 105, 225, 0.3)", 
             fill = "toself"
@@ -76,14 +76,14 @@ plot_ly() %>%
             y = f_us,
             type = 'scatter',
             mode = 'lines',
-            name = "Undersmoothing",
+            name = "Biased estimate (bandwidth = Silverman)",
             line  = list(color = "#FF8247")
   ) %>%
   add_trace(x = c(eval_points,rev(eval_points)),
             y = c(conf_int_us$lower, rev(conf_int_us$upper)),
             type = 'scatter',
             mode = 'lines',
-            name = "CI 95% (US)",
+            name = "95%-CI (using the variance of the biased estimate)",
             line = list(width = 0),
             fillcolor = "rgba(178, 34, 34, 0.2)", 
             fill = "toself"

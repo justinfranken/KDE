@@ -18,7 +18,7 @@ bandwidth_silverman <- function(x){
   #   bw            Calculated bandwidth (numeric)                             #
   ##############################################################################
   
-  bw <- 1.06 * length(x)^(-1/5)
+  bw <- 1.06 * sd(x) * length(x)^(-1/5)
   
   return(bw)
 }
