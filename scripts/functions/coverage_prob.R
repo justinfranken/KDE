@@ -37,25 +37,24 @@ coverage_for_simulation_step <- function(n,
   
   # rule of thumb methods
   if(bandwidth_model == "silverman"){
-    h <- bandwidth_silverman(x)
+    h <- bandwidth_silverman(x, lambda = 1)
   }
   
   # halls rule for undersmoothing with different lambdas 
   if(bandwidth_model == "silverman_0.1"){
-    h <- 0.1 * bandwidth_silverman(x)
+    h <- bandwidth_silverman(x, lambda = 0.1)
   }
-  
   if(bandwidth_model == "silverman_0.3"){
-    h <- 0.3 * bandwidth_silverman(x)
+    h <- bandwidth_silverman(x, lambda = 0.3)
   }
   if(bandwidth_model == "silverman_0.5"){
-    h <- 0.5 * bandwidth_silverman(x)
+    h <- bandwidth_silverman(x, lambda = 0.5)
   }   
   if(bandwidth_model == "silverman_0.7"){
-    h <- 0.7 * bandwidth_silverman(x)
+    h <- bandwidth_silverman(x, lambda = 0.7)
   } 
   if(bandwidth_model == "silverman_1.0"){
-    h <- bandwidth_silverman(x)
+    h <- bandwidth_silverman(x, lambda = 1)
   } 
   #-----------------------------------------------------------------------------
   # select confidence interval model 

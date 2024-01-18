@@ -6,7 +6,7 @@
 
 #### Rule of thumb methods
 
-bandwidth_silverman <- function(x){
+bandwidth_silverman <- function(x,lambda){
   ##############################################################################
   # Function for bandwidth selection as proposed by Silverman                  #
   #                                                                            #
@@ -18,7 +18,7 @@ bandwidth_silverman <- function(x){
   #   bw            Calculated bandwidth (numeric)                             #
   ##############################################################################
   
-  bw <- 1.06 * sd(x) * length(x)^(-1/5)
+  bw <- 1.06 * sd(x) * length(x)^(-1/(lambda*5))
   
   return(bw)
 }
