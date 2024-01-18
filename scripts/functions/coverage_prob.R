@@ -53,6 +53,9 @@ coverage_for_simulation_step <- function(n,
   if(bandwidth_model == "silverman_0.7"){
     h <- bandwidth_silverman(x, lambda = 0.7)
   } 
+  if(bandwidth_model == "silverman_0.9"){
+    h <- bandwidth_silverman(x, lambda = 0.9)
+  } 
   if(bandwidth_model == "silverman_1.0"){
     h <- bandwidth_silverman(x, lambda = 1)
   } 
