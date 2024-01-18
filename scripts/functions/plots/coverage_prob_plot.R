@@ -86,12 +86,8 @@ coverage_prob_n_plot_all_points <- function(data,
                                                   "bw = ",bandwidth_model)
   )
   
-  #floor(min(data$coverage_prob)*10)/10
-  #y_axis_range <- c(0.5,1)
-  #y_axis_tickvals <- seq(0.5,1,0.1)
-  
-  y_axis_range <- NA
-  y_axis_tickvals <- NA
+  y_axis_range <- c(0.6,1)
+  y_axis_tickvals <- seq(0.6,1,0.1)
 
   annotations = list( 
     list( 
@@ -166,7 +162,9 @@ coverage_prob_n_plot_all_points <- function(data,
   ),
   yaxis = list(title = list(text = "<B>Coverage probability<B>",
                             font = list(size = 10)),
-               tickfont = list(size = 10)
+               tickfont = list(size = 10),
+               range = y_axis_range,
+               tickvals = y_axis_tickvals
   )
   )
   
@@ -191,7 +189,9 @@ coverage_prob_n_plot_all_points <- function(data,
   ),
   yaxis = list(title = list(text = "<B>Coverage probability<B>",
                             font = list(size = 10)),
-               tickfont = list(size = 10)
+               tickfont = list(size = 10),
+               range = y_axis_range,
+               tickvals = y_axis_tickvals
   )
   )
   
@@ -216,7 +216,9 @@ coverage_prob_n_plot_all_points <- function(data,
   ),
   yaxis = list(title = list(text = "<B>Coverage probability<B>",
                             font = list(size = 10)),
-               tickfont = list(size = 10)
+               tickfont = list(size = 10),
+               range = y_axis_range,
+               tickvals = y_axis_tickvals
   )
   )
   
@@ -241,7 +243,9 @@ coverage_prob_n_plot_all_points <- function(data,
   ),
   yaxis = list(title = list(text = "<B>Coverage probability<B>",
                             font = list(size = 10)),
-               tickfont = list(size = 10)
+               tickfont = list(size = 10),
+               range = y_axis_range,
+               tickvals = y_axis_tickvals
   )
   )
   
@@ -266,7 +270,9 @@ coverage_prob_n_plot_all_points <- function(data,
   ),
   yaxis = list(title = list(text = "<B>Coverage probability<B>",
                             font = list(size = 10)),
-               tickfont = list(size = 10)
+               tickfont = list(size = 10),
+               range = y_axis_range,
+               tickvals = y_axis_tickvals
   )
   )
   

@@ -45,9 +45,9 @@ coverage_prob_n_plot_all_points(data = coverage_prob_grid,
 coverage_prob_n_plot_all_points(data = coverage_prob_grid,
                                 data_model = "m1",
                                 conf_int_model = c("us"),
-                                bandwidth_model =c("silverman_0.1","silverman_0.3",
+                                bandwidth_model =c("silverman_0.3",
                                                    "silverman_0.5","silverman_0.7",
-                                                   "silverman_1.0"),
+                                                   "silverman_0.9", "silverman_1.0"),
                                 kernel = "epanechnikov"
 )
 # -> One main observation

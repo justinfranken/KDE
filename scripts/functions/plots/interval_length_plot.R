@@ -22,6 +22,9 @@ interval_length_n_plot_all_points <- function(data,
                           interval_length = ifelse(ci_upper>0,ci_upper,0) - ifelse(ci_lower>0,ci_lower,0)
   )
   
+  y_axis_range <- c(min(data$interval_length),
+                    max(data$interval_length))
+  
   annotations = list( 
     list( 
       x = 0.23,  
@@ -90,7 +93,8 @@ interval_length_n_plot_all_points <- function(data,
   ),
   yaxis = list(title = list(text = "<B>Interval length<B>",
                             font = list(size = 10)),
-               tickfont = list(size = 10)
+               tickfont = list(size = 10),
+               range = y_axis_range
   )
   )
   
@@ -110,7 +114,8 @@ interval_length_n_plot_all_points <- function(data,
   ),
   yaxis = list(title = list(text = "<B>Interval length<B>",
                             font = list(size = 10)),
-               tickfont = list(size = 10)
+               tickfont = list(size = 10),
+               range = y_axis_range
   )
   )
   
@@ -130,7 +135,8 @@ interval_length_n_plot_all_points <- function(data,
   ),
   yaxis = list(title = list(text = "<B>Interval length<B>",
                             font = list(size = 10)),
-               tickfont = list(size = 10)
+               tickfont = list(size = 10),
+               range = y_axis_range
   )
   )
   
@@ -150,7 +156,8 @@ interval_length_n_plot_all_points <- function(data,
   ),
   yaxis = list(title = list(text = "<B>Interval length<B>",
                             font = list(size = 10)),
-               tickfont = list(size = 10)
+               tickfont = list(size = 10),
+               range = y_axis_range
   )
   )
   
@@ -170,7 +177,8 @@ interval_length_n_plot_all_points <- function(data,
   ),
   yaxis = list(title = list(text = "<B>Interval length<B>",
                             font = list(size = 10)),
-               tickfont = list(size = 10)
+               tickfont = list(size = 10),
+               range = y_axis_range
   )
   )
   
