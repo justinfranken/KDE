@@ -88,10 +88,12 @@ coverage_prob_n_plot_all_points <- function(data,
   
   y_axis_range <- c(0.6,1)
   y_axis_tickvals <- seq(0.6,1,0.1)
-
+  height = 450
+  text_size = 9
+  
   annotations = list( 
     list( 
-      x = 0.23,  
+      x = 0.2,  
       y = 1,  
       text = "<B>x = -2<B>",  
       xref = "paper",  
@@ -111,7 +113,7 @@ coverage_prob_n_plot_all_points <- function(data,
       showarrow = FALSE 
     ),  
     list( 
-      x = 0.23,  
+      x = 0.2,  
       y = 0.6,  
       text = "<B>x = -1<B>",  
       xref = "paper",  
@@ -131,7 +133,7 @@ coverage_prob_n_plot_all_points <- function(data,
       showarrow = FALSE 
     ),
     list( 
-      x = 0.23,  
+      x = 0.2,  
       y = 0.26,  
       text = "<B>x = 0<B>",  
       xref = "paper",  
@@ -143,7 +145,8 @@ coverage_prob_n_plot_all_points <- function(data,
   )
   
   #----------------  minus 2
-  plot_x_minus_2 <- plot_ly(data[data$x_point == -2,], 
+  plot_x_minus_2 <- plot_ly(data[data$x_point == -2,],
+                            height = height,
                             x = ~n, 
                             y = ~coverage_prob, 
                             color = ~combined_model,
@@ -157,12 +160,12 @@ coverage_prob_n_plot_all_points <- function(data,
                      legendgroup = "ci",
                      name = "95% CI"
   ) %>% layout(xaxis = list(title = list(text = "<B>Sample size<B>",
-                                         font = list(size = 10)),
-                            tickfont = list(size = 10)
+                                         font = list(size = text_size)),
+                            tickfont = list(size = text_size)
   ),
   yaxis = list(title = list(text = "<B>Coverage probability<B>",
-                            font = list(size = 10)),
-               tickfont = list(size = 10),
+                            font = list(size = text_size)),
+               tickfont = list(size = text_size),
                range = y_axis_range,
                tickvals = y_axis_tickvals
   )
@@ -170,7 +173,8 @@ coverage_prob_n_plot_all_points <- function(data,
   
   #----------------  plus 2
   
-  plot_x_plus_2 <- plot_ly(data[data$x_point == 2,], 
+  plot_x_plus_2 <- plot_ly(data[data$x_point == 2,],
+                           height = height, 
                            x = ~n, 
                            y = ~coverage_prob, 
                            color = ~combined_model,
@@ -184,12 +188,12 @@ coverage_prob_n_plot_all_points <- function(data,
                      legendgroup = "ci",
                      name = "95% CI"
   ) %>% layout(xaxis = list(title = list(text = "<B>Sample size<B>",
-                                         font = list(size = 10)),
-                            tickfont = list(size = 10)
+                                         font = list(size = text_size)),
+                            tickfont = list(size = text_size)
   ),
   yaxis = list(title = list(text = "<B>Coverage probability<B>",
-                            font = list(size = 10)),
-               tickfont = list(size = 10),
+                            font = list(size = text_size)),
+               tickfont = list(size = text_size),
                range = y_axis_range,
                tickvals = y_axis_tickvals
   )
@@ -197,7 +201,8 @@ coverage_prob_n_plot_all_points <- function(data,
   
   #----------------  minus 1
   
-  plot_x_minus_1 <- plot_ly(data[data$x_point == -1,], 
+  plot_x_minus_1 <- plot_ly(data[data$x_point == -1,],
+                            height = height,  
                             x = ~n, 
                             y = ~coverage_prob, 
                             color = ~combined_model,
@@ -211,12 +216,12 @@ coverage_prob_n_plot_all_points <- function(data,
                      legendgroup = "ci",
                      name = "95% CI"
   ) %>% layout(xaxis = list(title = list(text = "<B>Sample size<B>",
-                                         font = list(size = 10)),
-                            tickfont = list(size = 10)
+                                         font = list(size = text_size)),
+                            tickfont = list(size = text_size)
   ),
   yaxis = list(title = list(text = "<B>Coverage probability<B>",
-                            font = list(size = 10)),
-               tickfont = list(size = 10),
+                            font = list(size = text_size)),
+               tickfont = list(size = text_size),
                range = y_axis_range,
                tickvals = y_axis_tickvals
   )
@@ -224,7 +229,8 @@ coverage_prob_n_plot_all_points <- function(data,
   
   #----------------  plus 1
   
-  plot_x_plus_1 <- plot_ly(data[data$x_point == 1,], 
+  plot_x_plus_1 <- plot_ly(data[data$x_point == 1,],
+                           height = height, 
                            x = ~n, 
                            y = ~coverage_prob, 
                            color = ~combined_model,
@@ -238,12 +244,12 @@ coverage_prob_n_plot_all_points <- function(data,
                      legendgroup = "ci",
                      name = "95% CI"
   ) %>% layout(xaxis = list(title = list(text = "<B>Sample size<B>",
-                                         font = list(size = 10)),
-                            tickfont = list(size = 10)
+                                         font = list(size = text_size)),
+                            tickfont = list(size = text_size)
   ),
   yaxis = list(title = list(text = "<B>Coverage probability<B>",
-                            font = list(size = 10)),
-               tickfont = list(size = 10),
+                            font = list(size = text_size)),
+               tickfont = list(size = text_size),
                range = y_axis_range,
                tickvals = y_axis_tickvals
   )
@@ -251,7 +257,8 @@ coverage_prob_n_plot_all_points <- function(data,
   
   #----------------  0
   
-  plot_x_0 <- plot_ly(data[data$x_point == 0,], 
+  plot_x_0 <- plot_ly(data[data$x_point == 0,],
+                      height = height,  
                       x = ~n, 
                       y = ~coverage_prob, 
                       color = ~combined_model,
@@ -265,12 +272,12 @@ coverage_prob_n_plot_all_points <- function(data,
                      legendgroup = "ci",
                      name = "95% CI"
   ) %>% layout(xaxis = list(title = list(text = "<B>Sample size<B>",
-                                         font = list(size = 10)),
-                            tickfont = list(size = 10)
+                                         font = list(size = text_size)),
+                            tickfont = list(size = text_size)
   ),
   yaxis = list(title = list(text = "<B>Coverage probability<B>",
-                            font = list(size = 10)),
-               tickfont = list(size = 10),
+                            font = list(size = text_size)),
+               tickfont = list(size = text_size),
                range = y_axis_range,
                tickvals = y_axis_tickvals
   )
@@ -284,14 +291,15 @@ coverage_prob_n_plot_all_points <- function(data,
                   plot_x_plus_1,
                   plot_x_0, 
                   nrows = 3,
-                  margin = 0.07,
+                  margin = 0.09,
                   titleX = T,
                   titleY = T
   ) %>% 
     layout(title = paste0("Model ", substring(data_model,2,2)),
            annotations = annotations,
            legend = list(x = 0.5,y = -0.05,
-                         orientation = "v"
+                         orientation = "v",
+                         font = list(size = text_size)
            )
     )
   

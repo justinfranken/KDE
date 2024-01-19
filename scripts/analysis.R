@@ -8,7 +8,7 @@ source(paste0(getwd(),"/scripts/functions/plots/interval_length_plot.r"))
 # load simulation results
 load(paste0(getwd(),"/data/simulations/coverage_prob_grid.Rda"))
 
-#-------------------       coverage probability      ---------------------------
+#-----------------     results for  presentation           ---------------------
 
 # Plot of the coverage probability for confidence interval construction 
 # methods as a function of the sample size
@@ -29,8 +29,7 @@ coverage_prob_n_plot_all_points(data = coverage_prob_grid,
                                 data_model = "m1",
                                 conf_int_model = c("rbc"),
                                 bandwidth_model = c("plug_in_sj", "cv","silverman"),
-                                kernel = "epanechnikov"
-)
+                                kernel = "epanechnikov")
 
 # -> General observations independent of confidence model
 #      (1) Evaluation point effects coverage probability
@@ -47,7 +46,7 @@ coverage_prob_n_plot_all_points(data = coverage_prob_grid,
                                 conf_int_model = c("us"),
                                 bandwidth_model =c("silverman_0.3",
                                                    "silverman_0.5","silverman_0.7",
-                                                   "silverman_0.9", "silverman_1.0"),
+                                                    "silverman_1.0"),
                                 kernel = "epanechnikov"
 )
 # -> One main observation

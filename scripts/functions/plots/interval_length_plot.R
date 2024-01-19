@@ -25,9 +25,12 @@ interval_length_n_plot_all_points <- function(data,
   y_axis_range <- c(min(data$interval_length),
                     max(data$interval_length))
   
+  height = 450
+  text_size = 9
+  
   annotations = list( 
     list( 
-      x = 0.23,  
+      x = 0.2,  
       y = 1,  
       text = "<B>x = -2<B>",  
       xref = "paper",  
@@ -47,7 +50,7 @@ interval_length_n_plot_all_points <- function(data,
       showarrow = FALSE 
     ),  
     list( 
-      x = 0.23,  
+      x = 0.2,  
       y = 0.6,  
       text = "<B>x = -1<B>",  
       xref = "paper",  
@@ -67,7 +70,7 @@ interval_length_n_plot_all_points <- function(data,
       showarrow = FALSE 
     ),
     list( 
-      x = 0.23,  
+      x = 0.2,  
       y = 0.26,  
       text = "<B>x = 0<B>",  
       xref = "paper",  
@@ -80,6 +83,7 @@ interval_length_n_plot_all_points <- function(data,
   
   #----------------  minus 2
   plot_x_minus_2 <- plot_ly(data[data$x_point == -2,], 
+                            height = height,
                             x = ~n, 
                             y = ~interval_length, 
                             color = ~combined_model,
@@ -88,12 +92,12 @@ interval_length_n_plot_all_points <- function(data,
                             legendgroup = ~combined_model,
                             showlegend = F
   ) %>% layout(xaxis = list(title = list(text = "<B>Sample size<B>",
-                                         font = list(size = 10)),
-                            tickfont = list(size = 10)
+                                         font = list(size = text_size)),
+                            tickfont = list(size = text_size)
   ),
   yaxis = list(title = list(text = "<B>Interval length<B>",
-                            font = list(size = 10)),
-               tickfont = list(size = 10),
+                            font = list(size = text_size)),
+               tickfont = list(size = text_size),
                range = y_axis_range
   )
   )
@@ -101,6 +105,7 @@ interval_length_n_plot_all_points <- function(data,
   #----------------  plus 2
   
   plot_x_plus_2 <- plot_ly(data[data$x_point == 2,], 
+                           height = height,
                            x = ~n, 
                            y = ~interval_length, 
                            color = ~combined_model,
@@ -109,12 +114,12 @@ interval_length_n_plot_all_points <- function(data,
                            legendgroup = ~combined_model,
                            showlegend = F
   ) %>% layout(xaxis = list(title = list(text = "<B>Sample size<B>",
-                                         font = list(size = 10)),
-                            tickfont = list(size = 10)
+                                         font = list(size = text_size)),
+                            tickfont = list(size = text_size)
   ),
   yaxis = list(title = list(text = "<B>Interval length<B>",
-                            font = list(size = 10)),
-               tickfont = list(size = 10),
+                            font = list(size = text_size)),
+               tickfont = list(size = text_size),
                range = y_axis_range
   )
   )
@@ -122,6 +127,7 @@ interval_length_n_plot_all_points <- function(data,
   #----------------  minus 1
   
   plot_x_minus_1 <- plot_ly(data[data$x_point == -1,], 
+                            height = height,
                             x = ~n, 
                             y = ~interval_length, 
                             color = ~combined_model,
@@ -130,12 +136,12 @@ interval_length_n_plot_all_points <- function(data,
                             legendgroup = ~combined_model,
                             showlegend = F
   ) %>% layout(xaxis = list(title = list(text = "<B>Sample size<B>",
-                                         font = list(size = 10)),
-                            tickfont = list(size = 10)
+                                         font = list(size = text_size)),
+                            tickfont = list(size = text_size)
   ),
   yaxis = list(title = list(text = "<B>Interval length<B>",
-                            font = list(size = 10)),
-               tickfont = list(size = 10),
+                            font = list(size = text_size)),
+               tickfont = list(size = text_size),
                range = y_axis_range
   )
   )
@@ -143,6 +149,7 @@ interval_length_n_plot_all_points <- function(data,
   #----------------  plus 1
   
   plot_x_plus_1 <- plot_ly(data[data$x_point == 1,], 
+                           height = height,
                            x = ~n, 
                            y = ~interval_length, 
                            color = ~combined_model,
@@ -151,12 +158,12 @@ interval_length_n_plot_all_points <- function(data,
                            legendgroup = ~combined_model,
                            showlegend = F
   ) %>% layout(xaxis = list(title = list(text = "<B>Sample size<B>",
-                                         font = list(size = 10)),
-                            tickfont = list(size = 10)
+                                         font = list(size = text_size)),
+                            tickfont = list(size = text_size)
   ),
   yaxis = list(title = list(text = "<B>Interval length<B>",
-                            font = list(size = 10)),
-               tickfont = list(size = 10),
+                            font = list(size = text_size)),
+               tickfont = list(size = text_size),
                range = y_axis_range
   )
   )
@@ -164,6 +171,7 @@ interval_length_n_plot_all_points <- function(data,
   #----------------  0
   
   plot_x_0 <- plot_ly(data[data$x_point == 0,], 
+                      height = height,
                       x = ~n, 
                       y = ~interval_length, 
                       color = ~combined_model,
@@ -172,12 +180,12 @@ interval_length_n_plot_all_points <- function(data,
                       legendgroup = ~combined_model,
                       showlegend = T
   ) %>% layout(xaxis = list(title = list(text = "<B>Sample size<B>",
-                                         font = list(size = 10)),
-                            tickfont = list(size = 10)
+                                         font = list(size = text_size)),
+                            tickfont = list(size = text_size)
   ),
   yaxis = list(title = list(text = "<B>Interval length<B>",
-                            font = list(size = 10)),
-               tickfont = list(size = 10),
+                            font = list(size = text_size)),
+               tickfont = list(size = text_size),
                range = y_axis_range
   )
   )
@@ -190,14 +198,15 @@ interval_length_n_plot_all_points <- function(data,
                   plot_x_plus_1,
                   plot_x_0, 
                   nrows = 3,
-                  margin = 0.07,
+                  margin = 0.09,
                   titleX = T,
                   titleY = T
   ) %>% 
     layout(title = paste0("Model ", substring(data_model,2,2)),
            annotations = annotations,
            legend = list(x = 0.5,y = -0.05,
-                         orientation = "v"
+                         orientation = "v",
+                         font = list(size = 10)
            )
     )
   
