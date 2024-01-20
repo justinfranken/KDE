@@ -43,7 +43,7 @@ conf_int_rbc<- kde_rbc$ci[["rbc"]]
 
 kde_us <- kde(x = x,
                eval = eval_points,
-               h = bandwidth_silverman(x),
+               h = bandwidth_silverman(x,lambda = 1),
                kernel = "epanechnikov",
                ci = c("us"),
                alpha = 0.05
@@ -96,5 +96,5 @@ plot_ly() %>%
                        orientation = "h")
   ) 
 
-
+sum(f_us)
 
