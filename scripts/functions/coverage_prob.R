@@ -2,6 +2,8 @@ coverage_for_simulation_step <- function(n,
                                          x_point,
                                          data_model,
                                          bandwidth_model,
+                                         eta,
+                                         lambda,
                                          conf_int_model,
                                          kernel,
                                          alpha
@@ -19,9 +21,6 @@ coverage_for_simulation_step <- function(n,
   # save true value of distribution for x_point in f_point
   f_point <- data$f_point
   
-  # remove data
-  rm(data)
-  
   #-----------------------------------------------------------------------------
   # select bandwidth model 
   
@@ -37,31 +36,18 @@ coverage_for_simulation_step <- function(n,
   
   # rule of thumb methods
   if(bandwidth_model == "silverman"){
-    h <- bandwidth_silverman(x, lambda = 1)
+    h <- bandwidth_silverman(x, lambda = lambda)
   }
   
-  # halls rule for undersmoothing with different lambdas 
-  if(bandwidth_model == "silverman_0.1"){
-    h <- bandwidth_silverman(x, lambda = 0.1)
-  }
-  if(bandwidth_model == "silverman_0.3"){
-    h <- bandwidth_silverman(x, lambda = 0.3)
-  }
-  if(bandwidth_model == "silverman_0.5"){
-    h <- bandwidth_silverman(x, lambda = 0.5)
-  }   
-  if(bandwidth_model == "silverman_0.7"){
-    h <- bandwidth_silverman(x, lambda = 0.7)
-  } 
-  if(bandwidth_model == "silverman_0.9"){
-    h <- bandwidth_silverman(x, lambda = 0.9)
-  } 
-  if(bandwidth_model == "silverman_1.0"){
-    h <- bandwidth_silverman(x, lambda = 1)
-  } 
   #-----------------------------------------------------------------------------
   # select confidence interval model 
-  conf_int <- kde(x = x, eval = x_point, h = h, kernel = kernel, ci = conf_int_model, alpha = alpha
+  conf_int <- kde(x = x, 
+                  eval = x_point, 
+                  h = h, 
+                  b = h * eta, 
+                  kernel = kernel, 
+                  ci = conf_int_model, 
+                  alpha = alpha
                   )$ci[[conf_int_model]]
   
   #-----------------------------------------------------------------------------
@@ -76,12 +62,14 @@ coverage_for_simulation_step <- function(n,
 
 coverage_for_n <- function(n,
                            S,
-                          data_model,
-                          x_point,
-                          bandwidth_model,
-                          conf_int_model,
-                          kernel,
-                          alpha){
+                           data_model,
+                           x_point,
+                           bandwidth_model,
+                           eta = 1,
+                           lambda = 1,
+                           conf_int_model,
+                           kernel,
+                           alpha){
   
   simulations <- lapply((1:S),function(s){
     
@@ -89,6 +77,8 @@ coverage_for_n <- function(n,
                                              x_point,
                                              data_model,
                                              bandwidth_model,
+                                             eta,
+                                             lambda,
                                              conf_int_model,
                                              kernel,
                                              alpha  

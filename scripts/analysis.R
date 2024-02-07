@@ -1,3 +1,5 @@
+#--------------------     Monte-Carlo Simulation          ----------------------
+
 # import libraries
 source(paste0(getwd(),"/scripts/lib.r"))
 
@@ -8,88 +10,88 @@ source(paste0(getwd(),"/scripts/functions/plots/interval_length_plot.r"))
 # load simulation results
 load(paste0(getwd(),"/data/simulations/coverage_prob_grid.Rda"))
 
-#-----------------     results for  presentation           ---------------------
+# choose data model
+data_model = "m1"
 
-# Plot of the coverage probability for confidence interval construction 
-# methods as a function of the sample size
-
-# Plot for analysing an evaluation point
-coverage_prob_n_plot(data = coverage_prob_grid,
-                     data_model = "m1",
-                     x_point = 0,
-                     conf_int_model = c("bc","rbc","us"),
-                     bandwidth_model = c("plug_in_sj","cv",
-                                         "silverman"),
-                     kernel = "epanechnikov",
-                     x_axis_log = FALSE
-)
+#-------------------     5.1 Effect on coverage probability        -------------
 
 #--------------   RBC
 coverage_prob_n_plot_all_points(data = coverage_prob_grid,
-                                data_model = "m1",
+                                data_model = data_model,
                                 conf_int_model = c("rbc"),
                                 bandwidth_model = c("plug_in_sj", "cv","silverman"),
+                                lambda = 1,
+                                eta = 1,
                                 kernel = "epanechnikov")
-
-# -> General observations independent of confidence model
-#      (1) Evaluation point effects coverage probability
-#      (2) Coverage probability depends on n 
-
-# -> One main observation
-#      (1) Bandwidth estimators play a minor role (for coverage probability, 
-#          but probably for interval length)
-#            
 
 #--------------   US
 coverage_prob_n_plot_all_points(data = coverage_prob_grid,
-                                data_model = "m1",
+                                data_model = data_model,
                                 conf_int_model = c("us"),
-                                bandwidth_model =c("silverman_0.3",
-                                                   "silverman_0.5","silverman_0.7",
-                                                    "silverman_1.0"),
-                                kernel = "epanechnikov"
-)
-# -> One main observation
-#      (1) Bandwidth estimators play a larger role 
-#             - Explanation: Small sample size leads to f_k = 0, when h is too small
-#      (3) General Problem: How do choose lambda in practice? Since true distribution
-#          is not available?
+                                bandwidth_model = c("plug_in_sj", "cv","silverman"),
+                                lambda = c(0.2,0.4,0.6,0.8,1),
+                                eta = 1,
+                                kernel = "epanechnikov")
 
 #--------------   BC 
 coverage_prob_n_plot_all_points(data = coverage_prob_grid,
-                                data_model = "m1",
+                                data_model = data_model,
                                 conf_int_model = c("bc"),
-                                bandwidth_model = c("plug_in_sj", "cv","silverman","scott"),
-                                kernel = "epanechnikov"
-)
-
-# -> One main observation
-#      (1) We have no valid construction of confidence interval's.
-#          Reason: Since rho does not go to zero, we don't account for the variance
-#          of the bias 
+                                bandwidth_model = c("plug_in_sj", "cv","silverman"),
+                                lambda = 1,
+                                eta = 1,
+                                kernel = "epanechnikov")
 
 #--------------   Best models
 coverage_prob_n_plot_all_points(data = coverage_prob_grid,
-                                data_model = "m1",
+                                data_model = data_model,
                                 conf_int_model = c("rbc","us"),
-                                bandwidth_model = c("cv",
-                                                    "silverman_1.0"
-                                                    ),
+                                bandwidth_model = c("silverman"),
+                                lambda = 1,
+                                eta = 1,
                                 kernel = "epanechnikov"
 )
 
-#-------------------         interval length         ---------------------------
+#-------------------     5.2 Effect on interval length     ---------------------
+
+#--------------   RBC
+interval_length_n_plot_all_points(data = coverage_prob_grid,
+                                data_model = data_model,
+                                conf_int_model = c("rbc"),
+                                bandwidth_model = c("plug_in_sj", "cv","silverman"),
+                                lambda = 1,
+                                eta = 1,
+                                kernel = "epanechnikov")
+
+#--------------   US
+interval_length_n_plot_all_points(data = coverage_prob_grid,
+                                data_model = data_model,
+                                conf_int_model = c("us"),
+                                bandwidth_model = c("plug_in_sj", "cv","silverman"),
+                                lambda = c(0.2,0.4,0.6,0.8,1),
+                                eta = 1,
+                                kernel = "epanechnikov")
+
+#--------------   BC 
+interval_length_n_plot_all_points(data = coverage_prob_grid,
+                                data_model = data_model,
+                                conf_int_model = c("bc"),
+                                bandwidth_model = c("plug_in_sj", "cv","silverman"),
+                                lambda = 1,
+                                eta = 1,
+                                kernel = "epanechnikov")
 
 #--------------   Best models
 interval_length_n_plot_all_points(data = coverage_prob_grid,
-                                data_model = "m1",
+                                data_model = data_model,
                                 conf_int_model = c("rbc","us"),
-                                bandwidth_model = c("silverman_1.0",
-                                                    "cv"),
+                                bandwidth_model = c("silverman"),
+                                lambda = 1,
+                                eta = 1,
                                 kernel = "epanechnikov"
 )
 
-# -> One central observation
-#      (1) Undersmoothing is better in terms of interval length.
-#          Explanation: RBC Standard Error carry variance of Bias: 
-#          Var(bias corrected estimate) = Var(f-Bias) = Var(f) + Var(Bias) - 2*Cov(f,Bias)
+#-------------------     5.3 Relaxing b=h      ---------------------------------
+
+# b = h * eta
+

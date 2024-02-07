@@ -3,22 +3,18 @@ coverage_prob_n_plot <- function(data,
                                  x_point,
                                  conf_int_model = c("rbc","bc","us"),
                                  bandwidth_model,
-                                 kernel = "epanechnikov",
-                                 x_axis_log = TRUE
+                                 lambda = 1,
+                                 eta = 1, # b = h
+                                 kernel = "epanechnikov"
                                  ){
-  
-  if (x_axis_log == TRUE){
-    x_axis_type <- "log"
-  }
-  if (x_axis_log == FALSE){
-    x_axis_type <- NULL
-  }
   
   data <- data[
     c(
       coverage_prob_grid$data_model == data_model &
       coverage_prob_grid$x_point == x_point &
       coverage_prob_grid$conf_int_model %in% conf_int_model &
+      coverage_prob_grid$eta %in% eta &
+      coverage_prob_grid$lambda %in% lambda &
       coverage_prob_grid$bandwidth_model %in% bandwidth_model &
       coverage_prob_grid$kernel == kernel
     ),
@@ -26,7 +22,10 @@ coverage_prob_n_plot <- function(data,
   
   data <- data %>% mutate(combined_model = paste0("ci = ",conf_int_model,
                                                   "\n",
-                                                  "bw = ",bandwidth_model)
+                                                  "bw = ",bandwidth_model,
+                                                  "\n",
+                                                  "(\u03BB = ",lambda,", \u03B7 = ",eta,")"
+                                                  )
                           )
   
   plot <- plot_ly(data, 
@@ -48,7 +47,6 @@ coverage_prob_n_plot <- function(data,
     ),
     xaxis = list(title = list(text = "<B>Sample size<B>",
                               font = list(size = 12)),
-                              type = x_axis_type, 
                  tickfont = list(size = 12)
                  ),
     yaxis = list(title = list(text = "<B>Estimated coverage probability<B>",
@@ -69,21 +67,28 @@ coverage_prob_n_plot_all_points <- function(data,
                                             x_point,
                                             conf_int_model = c("rbc","bc","us"),
                                             bandwidth_model,
+                                            lambda = 1,
+                                            eta = 1,
                                             kernel = "epanechnikov"
 ){
   
-  data <- coverage_prob_grid[
+  data <- data[
     c(
       coverage_prob_grid$data_model == data_model &
-        coverage_prob_grid$conf_int_model %in% conf_int_model &
-        coverage_prob_grid$bandwidth_model %in% bandwidth_model &
-        coverage_prob_grid$kernel == kernel
+      coverage_prob_grid$conf_int_model %in% conf_int_model &
+      coverage_prob_grid$eta %in% eta &
+      coverage_prob_grid$lambda %in% lambda &
+      coverage_prob_grid$bandwidth_model %in% bandwidth_model &
+      coverage_prob_grid$kernel == kernel
     ),
   ]
   
   data <- data %>% mutate(combined_model = paste0("ci = ",conf_int_model,
-                                                  ", ",
-                                                  "bw = ",bandwidth_model)
+                                                  "\n",
+                                                  "bw = ",bandwidth_model,
+                                                  "\n",
+                                                  "(\u03BB = ",lambda,", \u03B7 = ",eta,")"
+  )
   )
   
   y_axis_range <- c(0.6,1)

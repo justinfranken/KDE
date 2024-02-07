@@ -4,21 +4,27 @@ interval_length_n_plot_all_points <- function(data,
                                               x_point,
                                               conf_int_model = c("rbc","bc","us"),
                                               bandwidth_model,
+                                              lambda = 1,
+                                              eta = 1,
                                               kernel = "epanechnikov"
 ){
   
-  data <- coverage_prob_grid[
+  data <- data[
     c(
       coverage_prob_grid$data_model == data_model &
         coverage_prob_grid$conf_int_model %in% conf_int_model &
+        coverage_prob_grid$eta %in% eta &
+        coverage_prob_grid$lambda %in% lambda &
         coverage_prob_grid$bandwidth_model %in% bandwidth_model &
         coverage_prob_grid$kernel == kernel
     ),
   ]
   
   data <- data %>% mutate(combined_model = paste0("ci = ",conf_int_model,
-                                                  ", ",
-                                                  "bw = ",bandwidth_model),
+                                                  "\n",
+                                                  "bw = ",bandwidth_model,
+                                                  "\n",
+                                                  "(\u03BB = ",lambda,", \u03B7 = ",eta,")"),
                           interval_length = ifelse(ci_upper>0,ci_upper,0) - ifelse(ci_lower>0,ci_lower,0)
   )
   
