@@ -83,12 +83,16 @@ coverage_prob_n_plot_all_points <- function(data,
     ),
   ]
   
-  data <- data %>% mutate(combined_model = paste0("ci = ",conf_int_model,
-                                                  "\n",
-                                                  "bw = ",bandwidth_model,
-                                                  "\n",
-                                                  "(\u03BB = ",lambda,", \u03B7 = ",eta,")"
-  )
+  data <- data %>% mutate(combined_model = case_when(
+    conf_int_model == "us" ~ paste0("ci = ",conf_int_model,
+                                      ", bw = ",bandwidth_model,
+                                      " (","\u03BB = ",lambda,")"
+                                     ),
+    conf_int_model != "us" ~ paste0("ci = ",conf_int_model,
+                                    ", bw = ",bandwidth_model,
+                                    " (","\u03B7 = ",eta,")"
+                                     )
+    )
   )
   
   y_axis_range <- c(0.6,1)
@@ -163,6 +167,7 @@ coverage_prob_n_plot_all_points <- function(data,
                      y = 0.95, yend = 0.95, color = "grey",
                      line = list(dash = "dash", color = "grey", width = 0.8),
                      legendgroup = "ci",
+                     showlegend = F,
                      name = "95% CI"
   ) %>% layout(xaxis = list(title = list(text = "<B>Sample size<B>",
                                          font = list(size = text_size)),
@@ -191,6 +196,7 @@ coverage_prob_n_plot_all_points <- function(data,
                      y = 0.95, yend = 0.95, color = "grey",
                      line = list(dash = "dash", color = "grey", width = 0.8),
                      legendgroup = "ci",
+                     showlegend = F,
                      name = "95% CI"
   ) %>% layout(xaxis = list(title = list(text = "<B>Sample size<B>",
                                          font = list(size = text_size)),
@@ -219,6 +225,7 @@ coverage_prob_n_plot_all_points <- function(data,
                      y = 0.95, yend = 0.95, color = "grey",
                      line = list(dash = "dash", color = "grey", width = 0.8),
                      legendgroup = "ci",
+                     showlegend = F,
                      name = "95% CI"
   ) %>% layout(xaxis = list(title = list(text = "<B>Sample size<B>",
                                          font = list(size = text_size)),
@@ -247,6 +254,7 @@ coverage_prob_n_plot_all_points <- function(data,
                      y = 0.95, yend = 0.95, color = "grey",
                      line = list(dash = "dash", color = "grey", width = 0.8),
                      legendgroup = "ci",
+                     showlegend = F,
                      name = "95% CI"
   ) %>% layout(xaxis = list(title = list(text = "<B>Sample size<B>",
                                          font = list(size = text_size)),
@@ -275,7 +283,8 @@ coverage_prob_n_plot_all_points <- function(data,
                      y = 0.95, yend = 0.95, color = "grey",
                      line = list(dash = "dash", color = "grey", width = 0.8),
                      legendgroup = "ci",
-                     name = "95% CI"
+                     name = "95% CI",
+                     showlegend = F
   ) %>% layout(xaxis = list(title = list(text = "<B>Sample size<B>",
                                          font = list(size = text_size)),
                             tickfont = list(size = text_size)
@@ -311,11 +320,4 @@ coverage_prob_n_plot_all_points <- function(data,
   
   return(plot)
 }
-
-
-
-
-
-
-
 

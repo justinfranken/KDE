@@ -95,3 +95,24 @@ interval_length_n_plot_all_points(data = coverage_prob_grid,
 
 # b = h * eta
 
+#--------------   RBC
+coverage_prob_n_plot_all_points(data = coverage_prob_grid,
+                                  data_model = data_model,
+                                  conf_int_model = c("rbc"),
+                                  bandwidth_model = c("silverman"),
+                                  lambda = 1,
+                                  eta = c(0.2,0.4,0.6,0.8,1),
+                                  kernel = "epanechnikov"
+)
+
+#--------------   RBC
+interval_length_n_plot_all_points(data = coverage_prob_grid,
+                                data_model = data_model,
+                                conf_int_model = c("rbc"),
+                                bandwidth_model = c("silverman"),
+                                lambda = 1,
+                                eta = c(0.2,0.4,0.6,0.8,1),
+                                kernel = "epanechnikov"
+)
+
+
