@@ -15,15 +15,6 @@ data_model = "m1"
 
 #-------------------     5.1 Effect on coverage probability        -------------
 
-#--------------   RBC
-coverage_prob_n_plot_all_points(data = coverage_prob_grid,
-                                data_model = data_model,
-                                conf_int_model = c("rbc"),
-                                bandwidth_model = c("plug_in_sj", "cv","silverman"),
-                                lambda = 1,
-                                eta = 1,
-                                kernel = "epanechnikov")
-
 #--------------   US
 coverage_prob_n_plot_all_points(data = coverage_prob_grid,
                                 data_model = data_model,
@@ -32,6 +23,16 @@ coverage_prob_n_plot_all_points(data = coverage_prob_grid,
                                 lambda = c(0.2,0.4,0.6,0.8,1),
                                 eta = 1,
                                 kernel = "epanechnikov")
+
+#--------------   RBC
+coverage_prob_n_plot_all_points(data = coverage_prob_grid,
+                                data_model = data_model,
+                                conf_int_model = c("rbc"),
+                                bandwidth_model = c("plug_in_sj", "cv","silverman"),
+                                lambda = 1,
+                                eta = 1,
+                                kernel = "epanechnikov"
+) 
 
 #--------------   BC 
 coverage_prob_n_plot_all_points(data = coverage_prob_grid,
@@ -45,7 +46,7 @@ coverage_prob_n_plot_all_points(data = coverage_prob_grid,
 #--------------   Best models
 coverage_prob_n_plot_all_points(data = coverage_prob_grid,
                                 data_model = data_model,
-                                conf_int_model = c("rbc","us"),
+                                conf_int_model = c("rbc","us","bc"),
                                 bandwidth_model = c("silverman"),
                                 lambda = 1,
                                 eta = 1,
@@ -54,6 +55,15 @@ coverage_prob_n_plot_all_points(data = coverage_prob_grid,
 
 #-------------------     5.2 Effect on interval length     ---------------------
 
+#--------------   BC 
+interval_length_n_plot_all_points(data = coverage_prob_grid,
+                                  data_model = datq_model,
+                                  conf_int_model = c("bc"),
+                                  bandwidth_model = c("plug_in_sj", "cv","silverman"),
+                                  lambda = 1,
+                                  eta = 1,
+                                  kernel = "epanechnikov")
+
 #--------------   RBC
 interval_length_n_plot_all_points(data = coverage_prob_grid,
                                 data_model = data_model,
@@ -72,19 +82,10 @@ interval_length_n_plot_all_points(data = coverage_prob_grid,
                                 eta = 1,
                                 kernel = "epanechnikov")
 
-#--------------   BC 
-interval_length_n_plot_all_points(data = coverage_prob_grid,
-                                data_model = data_model,
-                                conf_int_model = c("bc"),
-                                bandwidth_model = c("plug_in_sj", "cv","silverman"),
-                                lambda = 1,
-                                eta = 1,
-                                kernel = "epanechnikov")
-
 #--------------   Best models
 interval_length_n_plot_all_points(data = coverage_prob_grid,
                                 data_model = data_model,
-                                conf_int_model = c("rbc","us"),
+                                conf_int_model = c("rbc","us","bc"),
                                 bandwidth_model = c("silverman"),
                                 lambda = 1,
                                 eta = 1,

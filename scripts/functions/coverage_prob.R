@@ -22,7 +22,7 @@ coverage_for_simulation_step <- function(n,
   f_point <- data$f_point
   
   #-----------------------------------------------------------------------------
-  # select bandwidth model 
+  # select h 
   
   # plug in methods 
   if(bandwidth_model == "plug_in_sj"){
@@ -40,11 +40,22 @@ coverage_for_simulation_step <- function(n,
   }
   
   #-----------------------------------------------------------------------------
+  # select b
+  
+  # eta = 1 default option
+  if(eta == 1){
+    b <- h 
+  }else{
+    # undersmoothing leading bias term using silverman estimator
+    b <- bandwidth_silverman(x, lambda = eta)
+  }
+  
+  #-----------------------------------------------------------------------------
   # select confidence interval model 
   conf_int <- kde(x = x, 
                   eval = x_point, 
                   h = h, 
-                  b = h * eta, 
+                  b = b, 
                   kernel = kernel, 
                   ci = conf_int_model, 
                   alpha = alpha
@@ -52,7 +63,7 @@ coverage_for_simulation_step <- function(n,
   
   #-----------------------------------------------------------------------------
   # evaluate coverage of simulation step
-  check_coverage <- (conf_int$lower  <= f_point) & (f_point <= conf_int$upper)  
+  check_coverage <- (conf_int$lower <= f_point) & (f_point <= conf_int$upper)  
   
   return(list(check_coverage = check_coverage,
               ci_lower = conf_int$lower,

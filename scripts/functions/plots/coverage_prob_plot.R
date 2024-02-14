@@ -320,4 +320,3 @@ coverage_prob_n_plot_all_points <- function(data,
   
   return(plot)
 }
-

@@ -40,7 +40,7 @@ coverage_prob_grid_2 <- expand.grid(data_model = data_model,
                                     x_point = x_point,
                                     n = n,
                                     bandwidth_model = c("cv","plug_in_sj","silverman"),
-                                    eta = c(0.2,0.4,0.6,0.8,1), # b = h * eta
+                                    eta = c(0.2,0.4,0.6,0.8,1), 
                                     lambda = 1, # no undersmoothing 
                                     conf_int_model = c("rbc"),
                                     kernel = kernel)
@@ -65,7 +65,7 @@ tic()
 
 # Estimate coverage probability for all combinations
 for (i in c(1:grid_length)){
-  
+    
   param <- coverage_prob_grid[i,]
   
   coverage <- coverage_for_n(

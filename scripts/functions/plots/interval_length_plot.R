@@ -22,14 +22,15 @@ interval_length_n_plot_all_points <- function(data,
   
   data <- data %>% mutate(combined_model = case_when(
     conf_int_model == "us" ~ paste0("ci = ",conf_int_model,
-                                     ", bw = ",bandwidth_model,
-                                     " (","\u03BB = ",lambda,")"
+                                    ", bw = ",bandwidth_model,
+                                    " (","\u03BB = ",lambda,")"
     ),
     conf_int_model != "us" ~ paste0("ci = ",conf_int_model,
-                                     ", bw = ",bandwidth_model,
-                                     " (","\u03B7 = ",eta,")"
+                                    ", bw = ",bandwidth_model,
+                                    " (","\u03B7 = ",eta,")"
     )
-  ),
+  )
+  ,
   interval_length = ifelse(ci_upper>0,ci_upper,0) - ifelse(ci_lower>0,ci_lower,0)
   
   )
