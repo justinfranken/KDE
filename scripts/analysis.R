@@ -20,7 +20,7 @@ coverage_prob_n_plot_all_points(data = coverage_prob_grid,
                                 data_model = data_model,
                                 conf_int_model = c("us"),
                                 bandwidth_model = c("silverman"),
-                                lambda = c(0.2,0.4,0.6,0.8,1),
+                                lambda =  c(0.6,0.7,0.8,0.9,1),
                                 eta = 1,
                                 kernel = "epanechnikov")
 
@@ -57,7 +57,7 @@ coverage_prob_n_plot_all_points(data = coverage_prob_grid,
 
 #--------------   BC 
 interval_length_n_plot_all_points(data = coverage_prob_grid,
-                                  data_model = datq_model,
+                                  data_model = data_model,
                                   conf_int_model = c("bc"),
                                   bandwidth_model = c("plug_in_sj", "cv","silverman"),
                                   lambda = 1,
@@ -78,7 +78,7 @@ interval_length_n_plot_all_points(data = coverage_prob_grid,
                                 data_model = data_model,
                                 conf_int_model = c("us"),
                                 bandwidth_model = c("silverman"),
-                                lambda = c(0.2,0.4,0.6,0.8,1),
+                                lambda = c(0.6,0.7,0.8,0.9,1),
                                 eta = 1,
                                 kernel = "epanechnikov")
 
@@ -102,7 +102,7 @@ coverage_prob_n_plot_all_points(data = coverage_prob_grid,
                                   conf_int_model = c("rbc"),
                                   bandwidth_model = c("silverman"),
                                   lambda = 1,
-                                  eta = c(0.2,0.4,0.6,0.8,1),
+                                  eta = c(0.6,0.7,0.8,0.9,1),
                                   kernel = "epanechnikov"
 )
 
@@ -112,7 +112,7 @@ interval_length_n_plot_all_points(data = coverage_prob_grid,
                                 conf_int_model = c("rbc"),
                                 bandwidth_model = c("silverman"),
                                 lambda = 1,
-                                eta = c(0.2,0.4,0.6,0.8,1),
+                                eta = c(0.6,0.7,0.8,0.9,1),
                                 kernel = "epanechnikov"
 )
 

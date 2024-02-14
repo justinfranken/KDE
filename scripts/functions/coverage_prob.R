@@ -1,4 +1,4 @@
-coverage_for_simulation_step <- function(n,
+coverage_prob_step <- function(n,
                                          x_point,
                                          data_model,
                                          bandwidth_model,
@@ -71,28 +71,28 @@ coverage_for_simulation_step <- function(n,
          )
 }
 
-coverage_for_n <- function(n,
-                           S,
-                           data_model,
-                           x_point,
-                           bandwidth_model,
-                           eta = 1,
-                           lambda = 1,
-                           conf_int_model,
-                           kernel,
-                           alpha){
+coverage_prob <- function(n,
+                          S,
+                          data_model,
+                          x_point,
+                          bandwidth_model,
+                          eta = 1,
+                          lambda = 1,
+                          conf_int_model,
+                          kernel,
+                          alpha){
   
   simulations <- lapply((1:S),function(s){
     
-    coverage <- coverage_for_simulation_step(n,
-                                             x_point,
-                                             data_model,
-                                             bandwidth_model,
-                                             eta,
-                                             lambda,
-                                             conf_int_model,
-                                             kernel,
-                                             alpha  
+    coverage <- coverage_prop_step(n,
+                                   x_point,
+                                   data_model,
+                                   bandwidth_model,
+                                   eta,
+                                   lambda,
+                                   conf_int_model,
+                                   kernel,
+                                   alpha  
     )
     return(coverage)
     
