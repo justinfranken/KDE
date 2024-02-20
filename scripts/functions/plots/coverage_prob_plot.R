@@ -99,6 +99,7 @@ coverage_prob_n_plot_all_points <- function(data,
   y_axis_tickvals <- seq(0.6,1,0.1)
   height = 450
   text_size = 9
+  legend_size = 9
   
   annotations = list( 
     list( 
@@ -313,7 +314,8 @@ coverage_prob_n_plot_all_points <- function(data,
            annotations = annotations,
            legend = list(x = 0.5,y = -0.05,
                          orientation = "v",
-                         font = list(size = text_size)
+                         tracegroupgap = 1,
+                         font = list(size = legend_size)
            )
     )
   

@@ -24,24 +24,15 @@ coverage_prob_n_plot_all_points(data = coverage_prob_grid,
                                 eta = 1,
                                 kernel = "epanechnikov")
 
-#--------------   RBC
+#--------------   RBC and BC
 coverage_prob_n_plot_all_points(data = coverage_prob_grid,
                                 data_model = data_model,
-                                conf_int_model = c("rbc"),
+                                conf_int_model = c("rbc","bc"),
                                 bandwidth_model = c("plug_in_sj", "cv","silverman"),
                                 lambda = 1,
                                 eta = 1,
                                 kernel = "epanechnikov"
 ) 
-
-#--------------   BC 
-coverage_prob_n_plot_all_points(data = coverage_prob_grid,
-                                data_model = data_model,
-                                conf_int_model = c("bc"),
-                                bandwidth_model = c("plug_in_sj", "cv","silverman"),
-                                lambda = 1,
-                                eta = 1,
-                                kernel = "epanechnikov")
 
 #--------------   Best models
 coverage_prob_n_plot_all_points(data = coverage_prob_grid,
@@ -55,24 +46,6 @@ coverage_prob_n_plot_all_points(data = coverage_prob_grid,
 
 #-------------------     5.2 Effect on interval length     ---------------------
 
-#--------------   BC 
-interval_length_n_plot_all_points(data = coverage_prob_grid,
-                                  data_model = data_model,
-                                  conf_int_model = c("bc"),
-                                  bandwidth_model = c("plug_in_sj", "cv","silverman"),
-                                  lambda = 1,
-                                  eta = 1,
-                                  kernel = "epanechnikov")
-
-#--------------   RBC
-interval_length_n_plot_all_points(data = coverage_prob_grid,
-                                data_model = data_model,
-                                conf_int_model = c("rbc"),
-                                bandwidth_model = c("plug_in_sj", "cv","silverman"),
-                                lambda = 1,
-                                eta = 1,
-                                kernel = "epanechnikov")
-
 #--------------   US
 interval_length_n_plot_all_points(data = coverage_prob_grid,
                                 data_model = data_model,
@@ -81,6 +54,15 @@ interval_length_n_plot_all_points(data = coverage_prob_grid,
                                 lambda = c(0.6,0.7,0.8,0.9,1),
                                 eta = 1,
                                 kernel = "epanechnikov")
+
+#--------------   RBC and BC 
+interval_length_n_plot_all_points(data = coverage_prob_grid,
+                                  data_model = data_model,
+                                  conf_int_model = c("rbc","bc"),
+                                  bandwidth_model = c("plug_in_sj", "cv","silverman"),
+                                  lambda = 1,
+                                  eta = 1,
+                                  kernel = "epanechnikov")
 
 #--------------   Best models
 interval_length_n_plot_all_points(data = coverage_prob_grid,
@@ -93,8 +75,6 @@ interval_length_n_plot_all_points(data = coverage_prob_grid,
 )
 
 #-------------------     5.3 Relaxing b=h      ---------------------------------
-
-# b = h * eta
 
 #--------------   RBC
 coverage_prob_n_plot_all_points(data = coverage_prob_grid,

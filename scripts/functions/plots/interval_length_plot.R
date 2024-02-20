@@ -40,6 +40,7 @@ interval_length_n_plot_all_points <- function(data,
   
   height = 450
   text_size = 9
+  legend_size = 9
   
   annotations = list( 
     list( 
@@ -219,7 +220,8 @@ interval_length_n_plot_all_points <- function(data,
            annotations = annotations,
            legend = list(x = 0.5,y = -0.05,
                          orientation = "v",
-                         font = list(size = 10)
+                         tracegroupgap = 1,
+                         font = list(size = legend_size)
            )
     )
   

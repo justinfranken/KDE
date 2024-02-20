@@ -29,7 +29,7 @@ eval_points <- seq(min(x),max(x),length.out = 200)
 
 kde_rbc <- kde(x = x,
                eval = eval_points,
-               h = bandwidth_cv(x),
+               h = bandwidth_silverman(x,lambda = 1),
                kernel = "epanechnikov",
                ci = c("rbc"),
                alpha = 0.05
@@ -60,7 +60,7 @@ plot_ly() %>%
             y = f_rbc,
             type = 'scatter',
             mode = 'lines',
-            name = "Bias corrected estimate (bandwidth = Cross Validation)",
+            name = "Bias corrected estimate (bandwidth = Silverman, \u03B7 = 1)",
             line = list(color = "skyblue2")
             ) %>%
   add_trace(x = c(eval_points,rev(eval_points)),
@@ -76,7 +76,7 @@ plot_ly() %>%
             y = f_us,
             type = 'scatter',
             mode = 'lines',
-            name = "Biased estimate (bandwidth = Silverman)",
+            name = "Biased estimate (bandwidth = Silverman, \u03BB = 1)",
             line  = list(color = "#FF8247")
   ) %>%
   add_trace(x = c(eval_points,rev(eval_points)),
@@ -88,13 +88,11 @@ plot_ly() %>%
             fillcolor = "rgba(178, 34, 34, 0.2)", 
             fill = "toself"
   ) %>%
-  layout(title = paste0('<B>Kernel Density Estimation of Family Income After Taxes (n = ', 
-                        length(x),")<B>"),
+  layout(title = "",
          xaxis = list(title = '<B>Income<B>', tickvals = seq(0,700,25)*1000),
          yaxis = list(title = '<B>Estimated Density<B>', tickformat = ".4%"),
          legend = list(x = 0.15, y = 1,
                        orientation = "h")
   ) 
 
-sum(f_us)
 
