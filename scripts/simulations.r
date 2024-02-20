@@ -105,4 +105,4 @@ for (i in c(1:grid_length)){
 toc()
 
 # Save simulation results
-save(coverage_prob_grid, file="data/simulations/coverage_prob_grid.Rda")
+#save(coverage_prob_grid, file="data/simulations/coverage_prob_grid.Rda")

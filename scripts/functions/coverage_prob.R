@@ -1,12 +1,12 @@
 coverage_prob_step <- function(n,
-                                         x_point,
-                                         data_model,
-                                         bandwidth_model,
-                                         eta,
-                                         lambda,
-                                         conf_int_model,
-                                         kernel,
-                                         alpha
+                               x_point,
+                               data_model,
+                               bandwidth_model,
+                               eta,
+                               lambda,
+                               conf_int_model,
+                               kernel,
+                               alpha
 ){
   
   #-----------------------------------------------------------------------------
@@ -84,7 +84,7 @@ coverage_prob <- function(n,
   
   simulations <- lapply((1:S),function(s){
     
-    coverage <- coverage_prop_step(n,
+    coverage <- coverage_prob_step(n,
                                    x_point,
                                    data_model,
                                    bandwidth_model,
